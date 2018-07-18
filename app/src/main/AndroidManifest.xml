@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.Splash">
+
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="269380dbc21494c053f8cb3fb3370cd395bd4f82" />
