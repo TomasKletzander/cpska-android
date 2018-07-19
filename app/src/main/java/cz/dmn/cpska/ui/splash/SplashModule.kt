@@ -1,13 +1,19 @@
 package cz.dmn.cpska.ui.splash
 
+import android.app.Activity
+import cz.dmn.cpska.di.BaseActivityModule
 import dagger.Binds
 import dagger.Module
 
-@Module
-abstract class SplashModule {
-    @Binds
-    abstract fun bindPresenter(presenter: SplashPresenter): SplashMvp.Presenter
+@Module(includes = [BaseActivityModule::class])
+interface SplashModule {
 
     @Binds
-    abstract fun bindView(activity: SplashActivity): SplashMvp.View
+    fun bindActivity(activity: SplashActivity): Activity
+
+    @Binds
+    fun bindPresenter(presenter: SplashPresenter): SplashMvp.Presenter
+
+    @Binds
+    fun bindView(activity: SplashActivity): SplashMvp.View
 }
