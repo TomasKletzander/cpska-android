@@ -1,7 +1,6 @@
-package cz.dmn.cpska.ui
+package cz.dmn.cpska.mvp
 
-import cz.dmn.cpska.mvp.MvpPresenter
-import cz.dmn.cpska.mvp.MvpView
+import cz.dmn.cpska.ui.BaseActivity
 import javax.inject.Inject
 
 open class BaseMvpActivity<V: MvpView, P: MvpPresenter<V>> : BaseActivity() {
