@@ -10,4 +10,8 @@ class SplashActivity : BaseMvpActivity<SplashMvp.View, SplashMvp.Presenter>(), S
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
     }
+
+    override fun close() {
+        finish()
+    }
 }
