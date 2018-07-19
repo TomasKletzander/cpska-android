@@ -1,25 +1,26 @@
 package cz.dmn.cpska.ui.home
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import cz.dmn.cpska.R
+import cz.dmn.cpska.databinding.ActivityHomeBinding
 import cz.dmn.cpska.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import dagger.android.AndroidInjection
 
 class HomeActivity : BaseActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    lateinit var binding: ActivityHomeBinding
+
+    private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
-                message.setText(R.string.title_home)
+            R.id.navigationProfile -> {
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                message.setText(R.string.title_dashboard)
+            R.id.navigationLeaderboard -> {
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
-                message.setText(R.string.title_notifications)
+            R.id.navigationToday -> {
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -27,9 +28,12 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        setSupportActionBar(binding.toolbar)
+
+        binding.navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
     }
 }

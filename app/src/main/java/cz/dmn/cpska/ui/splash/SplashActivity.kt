@@ -1,7 +1,7 @@
 package cz.dmn.cpska.ui.splash
 
 import android.os.Bundle
-import cz.dmn.cpska.ui.BaseMvpActivity
+import cz.dmn.cpska.mvp.BaseMvpActivity
 import dagger.android.AndroidInjection
 
 class SplashActivity : BaseMvpActivity<SplashMvp.View, SplashMvp.Presenter>(), SplashMvp.View {

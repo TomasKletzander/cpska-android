@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">dmn:CPSka</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="appName">dmn:CPSka</string>
+    <string name="appTitle">CPSKA</string>
+    <string name="titleProfile">Profile</string>
+    <string name="titleLeaderboard">Leaderboard</string>
+    <string name="titleToday">Today</string>
 </resources>
