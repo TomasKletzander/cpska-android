@@ -3,5 +3,5 @@
     <string name="appTitle">CPSKA</string>
     <string name="titleProfile">Profile</string>
     <string name="titleLeaderboard">Leaderboard</string>
-    <string name="titleToday">Today</string>
+    <string name="titleFlights">Flights</string>
 </resources>
