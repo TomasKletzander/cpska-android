@@ -1,8 +1,8 @@
 package cz.dmn.cpska.ui.leaderboard
 
-import cz.dmn.cpska.data.api.leaderboard.Club
+import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.leaderboard.LeaderboardRow
-import cz.dmn.cpska.data.api.leaderboard.User
+import cz.dmn.cpska.data.api.User
 import cz.dmn.cpska.di.ActivityScope
 import cz.dmn.cpska.mvp.BaseMvpPresenter
 import io.reactivex.Observable

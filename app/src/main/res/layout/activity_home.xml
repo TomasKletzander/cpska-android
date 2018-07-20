@@ -44,10 +44,7 @@
 
                 <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
 
-                <FrameLayout
-                    android:id="@+id/flights"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                <include android:id="@+id/flights" layout="@layout/coord_flights"/>
 
             </ViewAnimator>
 

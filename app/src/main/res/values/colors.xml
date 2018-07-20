@@ -3,4 +3,5 @@
     <color name="colorPrimary">#164CAF</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="profileIconTint">#22164CAF</color>
 </resources>

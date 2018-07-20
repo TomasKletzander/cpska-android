@@ -9,6 +9,7 @@ import com.squareup.coordinators.Coordinators
 import cz.dmn.cpska.R
 import cz.dmn.cpska.databinding.ActivityHomeBinding
 import cz.dmn.cpska.ui.BaseActivity
+import cz.dmn.cpska.ui.flights.FlightsCoordinator
 import cz.dmn.cpska.ui.leaderboard.LeaderboardCoordinator
 import dagger.Lazy
 import dagger.android.AndroidInjection
@@ -18,6 +19,7 @@ class HomeActivity : BaseActivity() {
 
     lateinit var binding: ActivityHomeBinding
     @Inject lateinit var leaderboardCoordinatorLazy: Lazy<LeaderboardCoordinator>
+    @Inject lateinit var flightsCoordinatorLazy: Lazy<FlightsCoordinator>
 
     private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -50,7 +52,10 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun bindCoordinators(view: View): Coordinator? {
-        if (view == binding.leaderboard?.root) return leaderboardCoordinatorLazy.get()
-        return null
+        return when (view) {
+            binding.leaderboard?.root -> leaderboardCoordinatorLazy.get()
+            binding.flights?.root -> flightsCoordinatorLazy.get()
+            else -> null
+        }
     }
 }
