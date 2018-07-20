@@ -8,7 +8,8 @@ import cz.dmn.cpska.mvp.BaseMvpCoordinator
 import javax.inject.Inject
 
 @ActivityScope
-class LeaderboardCoordinator @Inject constructor(private val adapter: LeaderboardAdapter, private val binding: CoordLeaderboardBinding) : BaseMvpCoordinator<LeaderboardMvp.View, LeaderboardMvp.Presenter>(), LeaderboardMvp.View {
+class LeaderboardCoordinator @Inject constructor(private val adapter: LeaderboardAdapter, private val binding: CoordLeaderboardBinding)
+    : BaseMvpCoordinator<LeaderboardMvp.View, LeaderboardMvp.Presenter>(), LeaderboardMvp.View {
 
     override fun attach(view: View) {
         super.attach(view)

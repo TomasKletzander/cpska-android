@@ -15,4 +15,19 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
+    <style name="Text.Flights.Name" parent="Base.TextAppearance.AppCompat.Subhead">
+    </style>
+
+    <style name="Text.Flights.Club" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
+    <style name="Text.Flights.Glider" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
+    <style name="Text.Flights.Distance" parent="Base.TextAppearance.AppCompat.Subhead">
+    </style>
+
+    <style name="Text.Flights.Speed" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
 </resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="cz.dmn.cpska.ui.flights.FlightViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flightRowHeight"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/rowProfilePictureSize"
+            android:layout_height="@dimen/rowProfilePictureSize"
+            android:layout_marginStart="@dimen/marginBig"
+            android:layout_marginEnd="@dimen/marginStandard"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/account_circle"
+            android:tint="@color/profileIconTint"
+            android:tintMode="src_in"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/pilotInfoWidth"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/marginStandard"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="@{viewModel.name}"
+                style="@style/Text.Flights.Name"
+                tools:text="Tomas Kletzander"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/marginStandard"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:text="@{viewModel.club}"
+                    style="@style/Text.Flights.Club"
+                    tools:text="Medlanky"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:text="@{viewModel.glider}"
+                    style="@style/Text.Flights.Glider"
+                    tools:text="Astir CS"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="@{viewModel.distance}"
+                style="@style/Text.Flights.Distance"
+                tools:text="300 km"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="@{viewModel.speed}"
+                style="@style/Text.Flights.Speed"
+                tools:text="98 km/h"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
