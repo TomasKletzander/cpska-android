@@ -2,12 +2,15 @@ package cz.dmn.cpska.mvp
 
 import android.view.View
 import com.squareup.coordinators.Coordinator
+import dagger.Lazy
 import javax.inject.Inject
 
-class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V>> : Coordinator() {
+open class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V>> : Coordinator() {
 
-    @Inject lateinit var presenter: P
-    @Inject lateinit var view: V
+    @Inject lateinit var presenterLazy: Lazy<P>
+    @Inject lateinit var viewLazy: Lazy<V>
+    val presenter by lazy { presenterLazy.get() }
+    val view by lazy { viewLazy.get() }
 
     override fun attach(view: View) {
         presenter.attachView(this.view)

@@ -18,18 +18,38 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+                android:layout_height="wrap_content">
 
-            <FrameLayout
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?colorPrimary"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <ViewAnimator
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <FrameLayout
+                    android:id="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
+
+                <FrameLayout
+                    android:id="@+id/flights"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </ViewAnimator>
 
         </android.support.design.widget.CoordinatorLayout>
 
