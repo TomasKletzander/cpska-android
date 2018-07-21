@@ -21,10 +21,15 @@ class FlightsAdapter @Inject constructor(private val layoutInflater: LayoutInfla
         holder.binding.viewModel = flights[position]
     }
 
-    fun load(data: List<FlightData>) {
+    fun clear() {
         flights.clear()
+        notifyDataSetChanged()
+    }
+
+    fun add(data: List<FlightData>) {
         flights.addAll(data.map {
             FlightViewModel(it)
         })
+        notifyDataSetChanged()
     }
 }

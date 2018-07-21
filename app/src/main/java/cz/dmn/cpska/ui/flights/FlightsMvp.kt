@@ -1,16 +1,10 @@
 package cz.dmn.cpska.ui.flights
 
 import cz.dmn.cpska.data.api.FlightData
-import cz.dmn.cpska.mvp.MvpPresenter
-import cz.dmn.cpska.mvp.MvpView
+import cz.dmn.cpska.mvp.PagedDataPresenter
+import cz.dmn.cpska.mvp.PagedDataView
 
 interface FlightsMvp {
-
-    interface View: MvpView {
-        fun show(flights: List<FlightData>)
-    }
-
-    interface Presenter: MvpPresenter<View> {
-        fun load()
-    }
+    interface View: PagedDataView<FlightData>
+    interface Presenter: PagedDataPresenter<FlightData, View>
 }

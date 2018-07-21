@@ -106,7 +106,18 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
+    ///// Jsoup for HTML parsing
+    implementation "org.jsoup:jsoup:1.11.3"
+
     testImplementation 'junit:junit:4.12'
+
+    ///// Mockito
+    def mockitoVersion = '2.8.47'
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-inline:${mockitoVersion}"
+
+    ///// Mockito Kotlin
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
 
     //  Not doing Espresso tests yet
     //androidTestImplementation 'com.android.support.test:runner:1.0.2'
