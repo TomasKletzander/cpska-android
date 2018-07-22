@@ -3,7 +3,7 @@ package cz.dmn.cpska.ui.leaderboard
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.leaderboard.LeaderboardRow
 import cz.dmn.cpska.data.api.User
-import cz.dmn.cpska.di.ActivityScope
+import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-@ActivityScope
+@PerActivity
 class LeaderboardPresenter @Inject constructor() : BaseMvpPresenter<LeaderboardMvp.View>(), LeaderboardMvp.Presenter {
 
     private var disposables = CompositeDisposable()

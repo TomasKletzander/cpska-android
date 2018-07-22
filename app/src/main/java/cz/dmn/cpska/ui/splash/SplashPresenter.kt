@@ -1,6 +1,6 @@
 package cz.dmn.cpska.ui.splash
 
-import cz.dmn.cpska.di.ActivityScope
+import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
 import cz.dmn.cpska.ui.home.HomeNavigator
 import io.reactivex.Observable
@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-@ActivityScope
+@PerActivity
 class SplashPresenter @Inject constructor(private val homeNavigator: HomeNavigator) : BaseMvpPresenter<SplashMvp.View>(), SplashMvp.Presenter {
 
     private var disposable: Disposable? = null

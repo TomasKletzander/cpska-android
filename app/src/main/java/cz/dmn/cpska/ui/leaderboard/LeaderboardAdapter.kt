@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import cz.dmn.cpska.data.api.leaderboard.LeaderboardRow
 import cz.dmn.cpska.databinding.LeaderboardRowBinding
-import cz.dmn.cpska.di.ActivityScope
+import cz.dmn.cpska.di.PerActivity
 import javax.inject.Inject
 
-@ActivityScope
+@PerActivity
 class LeaderboardAdapter @Inject constructor(private val inflater: LayoutInflater) : RecyclerView.Adapter<LeaderboardRowViewHolder>() {
 
     val items = mutableListOf<LeaderboardRow>()

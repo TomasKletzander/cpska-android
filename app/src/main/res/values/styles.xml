@@ -15,6 +15,9 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
+    <style name="AppThemeOverlay.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
     <style name="Text.Flights.Name" parent="Base.TextAppearance.AppCompat.Subhead">
     </style>
 
@@ -28,6 +31,16 @@
     </style>
 
     <style name="Text.Flights.Speed" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
+    <style name="Text.Flights.Points" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:background">@drawable/points_bg</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Header.Date" parent="Base.TextAppearance.AppCompat.Caption">
+        <item name="android:background">@color/headerBg</item>
     </style>
 
 </resources>

@@ -1,13 +1,10 @@
 package cz.dmn.cpska.mvp
 
-import cz.dmn.cpska.data.PagedDataSource
-import io.reactivex.android.schedulers.AndroidSchedulers
+import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
-open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val dataSource: PagedDataSource<D>) : PagedDataPresenter<D, V>, BaseMvpPresenter<V>() {
-    private var pageIndex = 0
-    private var loadingDisposable: Disposable? = null
+open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interactor: BasePagedDataInteractor<List<D>>) : PagedDataPresenter<D, V>, BaseMvpPresenter<V>() {
+    private var loading = false
     private var requestNextPageDisposable: Disposable? = null
 
     override fun attachView(view: V) {
@@ -15,37 +12,48 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val dataSou
         reset()
         loadNextPage()
         requestNextPageDisposable = view.requestNextPage.subscribe {
-            if (loadingDisposable == null) {
+            if (!loading) {
                 loadNextPage()
             }
         }
     }
 
+    override fun detachView() {
+        requestNextPageDisposable?.dispose()
+        requestNextPageDisposable = null
+        super.detachView()
+    }
+
     override fun reset() {
         view?.clear()
-        pageIndex = 0
+        interactor.page = 0
+        interactor.unsubscribe()
+        loading = false
     }
 
     override fun loadNextPage() {
-        if (loadingDisposable != null) throw RuntimeException("Can't load while already loading")
-        view?.loading = true
-        loadingDisposable = dataSource
-                .getPage(pageIndex)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    loadingDisposable = null
-                    view?.apply {
-                        loading = false
-                        ++pageIndex
-                        addPage(it)
-                    }
-                }, {
-                    loadingDisposable = null
-                    view?.apply {
-                        loading = false
-                        showError("Error: To be changed")
-                    }
-                })
+        if (loading) return
+        loading = true
+        interactor.execute(object : BaseInteractorSubscriber<List<D>>() {
+            override fun onStart() {
+                view?.loading = true
+            }
+
+            override fun onNext(t: List<D>) {
+                view?.apply {
+                    addPage(t)
+                    loading = false
+                }
+                ++interactor.page
+                loading = false
+            }
+
+            override fun onError(e: Throwable) {
+                view?.apply {
+                    loading = false
+                    showError("To be changed")
+                }
+            }
+        })
     }
 }

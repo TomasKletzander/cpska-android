@@ -42,6 +42,9 @@ android {
     dataBinding {
         enabled true
     }
+    testOptions {
+        unitTests.returnDefaultValues true
+    }
 }
 
 kapt {
@@ -108,6 +111,12 @@ dependencies {
 
     ///// Jsoup for HTML parsing
     implementation "org.jsoup:jsoup:1.11.3"
+
+    ///// Sticky headers
+    implementation "com.brandongogetap:stickyheaders:0.5.1"
+
+    ///// Joda time
+    implementation "joda-time:joda-time:2.9.9"
 
     testImplementation 'junit:junit:4.12'
 

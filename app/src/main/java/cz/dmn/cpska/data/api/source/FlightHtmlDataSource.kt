@@ -1,18 +1,24 @@
 package cz.dmn.cpska.data.api.source
 
-import cz.dmn.cpska.data.PagedDataSource
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.CpsHtmlApi
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.data.api.Plane
 import cz.dmn.cpska.data.api.User
+import cz.dmn.cpska.di.PerApplication
 import io.reactivex.Observable
+import org.joda.time.format.DateTimeFormat
 import org.jsoup.Jsoup
 import javax.inject.Inject
 
-class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) : PagedDataSource<FlightData> {
+@PerApplication
+class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) {
 
-    override fun getPage(pageIndex: Int): Observable<List<FlightData>> = api.getFlights(pageIndex * 100)
+    companion object {
+        val dateFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+    }
+
+    fun getPage(pageIndex: Int): Observable<List<FlightData>> = api.getFlights(pageIndex * 100)
             .map {
                 val doc = Jsoup.parse(it.body()?.byteStream(), "windows-1250", "")
                 val table = doc.body().getElementsByClass("tblList")[0]
@@ -20,7 +26,7 @@ class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) : Pa
                     it.hasClass("rowEven") || it.hasClass("rowOdd")
                 }.map {
                     val cells = it.getElementsByTag("td")
-                    val date = cells[0].ownText()
+                    val date = dateFormatter.parseLocalDate(cells[0].child(0).ownText())
                     val country = cells[2].ownText()
                     val pointsText = cells[3].ownText().split(" ")[0]
                     val points = if (pointsText.isEmpty()) 0 else pointsText.toInt()

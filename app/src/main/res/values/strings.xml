@@ -1,7 +1,12 @@
 <resources>
     <string name="appName">dmn:CPSka</string>
     <string name="appTitle">CPSKA</string>
+    <string name="appSubtitle">Celostátní plachtařská soutěž</string>
     <string name="titleProfile">Profile</string>
     <string name="titleLeaderboard">Leaderboard</string>
     <string name="titleFlights">Flights</string>
+
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="refresh">Refresh</string>
 </resources>
