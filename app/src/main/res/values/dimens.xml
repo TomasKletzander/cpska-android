@@ -6,6 +6,7 @@
     <dimen name="marginHuge">32dp</dimen>
 
     <dimen name="rowProfilePictureSize">48dp</dimen>
-    <dimen name="pilotInfoWidth">180dp</dimen>
     <dimen name="flightRowHeight">56dp</dimen>
+    <dimen name="flightSpeedWidth">72dp</dimen>
+    <dimen name="flightPointsWidth">56dp</dimen>
 </resources>

@@ -10,11 +10,11 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface ActivityBindingModule {
 
-    @ActivityScope
+    @PerActivity
     @ContributesAndroidInjector(modules = [SplashModule::class])
     fun contributeSplashActivityInjector(): SplashActivity
 
-    @ActivityScope
+    @PerActivity
     @ContributesAndroidInjector(modules = [HomeModule::class])
     fun contributeHomeActivityInjector(): HomeActivity
 }

@@ -23,8 +23,9 @@
             android:tintMode="src_in"/>
 
         <LinearLayout
-            android:layout_width="@dimen/pilotInfoWidth"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginEnd="@dimen/marginStandard"
             android:orientation="vertical"
             android:gravity="center_vertical">
@@ -67,9 +68,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/flightSpeedWidth"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/marginBig"
+            android:layout_marginEnd="@dimen/marginStandard"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -92,6 +93,18 @@
                 tools:text="98 km/h"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/flightPointsWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginBig"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="@{viewModel.points}"
+            style="@style/Text.Flights.Points"
+            tools:text="1000"/>
 
     </LinearLayout>
 

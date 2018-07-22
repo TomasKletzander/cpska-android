@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?colorPrimary"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+                    app:theme="@style/AppThemeOverlay.Toolbar"/>
 
             </android.support.design.widget.AppBarLayout>
 
@@ -37,14 +37,14 @@
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+                <include android:id="@+id/flights" layout="@layout/coord_flights"/>
+
+                <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
+
                 <FrameLayout
                     android:id="@+id/profile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-
-                <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
-
-                <include android:id="@+id/flights" layout="@layout/coord_flights"/>
 
             </ViewAnimator>
 
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation" />
+            app:menu="@menu/navigation_home" />
 
     </LinearLayout>
 

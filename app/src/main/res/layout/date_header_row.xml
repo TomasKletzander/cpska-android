@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="cz.dmn.cpska.ui.common.DateHeaderViewModel"/>
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/marginBig"
+        android:paddingTop="@dimen/marginStandard"
+        android:paddingBottom="@dimen/marginStandard"
+        android:text="@{viewModel.date}"
+        style="@style/Text.Header.Date"
+        tools:text="20.2.1975">
+
+    </TextView>
+
+</layout>
