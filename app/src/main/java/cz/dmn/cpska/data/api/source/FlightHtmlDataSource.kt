@@ -47,7 +47,7 @@ class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) {
                     }
                     val clubName = cells[7].ownText()
                     val planeName = cells[8].ownText()
-                    FlightData(date, country, points, User(0, userName), distance, speed, Club(clubName), Plane(planeName))
+                    FlightData(date, country, points, User(0, userName), distance, speed, Club(0, clubName), Plane(planeName))
                 }
             }
 }

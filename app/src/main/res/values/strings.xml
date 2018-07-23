@@ -2,11 +2,17 @@
     <string name="appName">dmn:CPSka</string>
     <string name="appTitle">CPSKA</string>
     <string name="appSubtitle">Celostátní plachtařská soutěž</string>
-    <string name="titleProfile">Profile</string>
-    <string name="titleLeaderboard">Leaderboard</string>
-    <string name="titleFlights">Flights</string>
+    <string name="titleProfile">Profil</string>
+    <string name="titleLeaderboard">Pořadí</string>
+    <string name="titleFlights">Lety</string>
 
-    <string name="today">Today</string>
-    <string name="yesterday">Yesterday</string>
-    <string name="refresh">Refresh</string>
+    <string name="today">Dnes</string>
+    <string name="yesterday">Včera</string>
+    <string name="refresh">Obnovit</string>
+    <string name="titleFlightsSettings">Nastavení letů</string>
+    <string name="failedToInitializeApp">Nepovedlo se inicializovat aplikaci. Jsi připojený k internetu?</string>
+    <string name="ok">OK</string>
+    <string name="titleError">Ajaj!</string>
+    <string name="labelClubToHighlight">Zvýraznit aeroklub:</string>
+    <string name="noClubToHighlight">Žádný</string>
 </resources>

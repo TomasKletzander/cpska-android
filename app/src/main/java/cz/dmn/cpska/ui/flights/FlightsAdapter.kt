@@ -1,13 +1,16 @@
 package cz.dmn.cpska.ui.flights
 
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
+import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.DateHeaderRowBinding
 import cz.dmn.cpska.databinding.FlightsRowBinding
 import cz.dmn.cpska.databinding.LoaderRowBinding
+import cz.dmn.cpska.di.HighlightedBackground
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.ui.common.DateHeaderViewHolder
 import cz.dmn.cpska.ui.common.DateHeaderViewModel
@@ -20,12 +23,14 @@ import javax.inject.Inject
 @PerActivity
 class FlightsAdapter @Inject constructor(
     private val layoutInflater: LayoutInflater,
-    private val dateFormatter: RecentDateFormatter
+    private val dateFormatter: RecentDateFormatter,
+    @HighlightedBackground private val highlightedBackground: Drawable
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderHandler {
 
     private val flights = mutableListOf<FlightViewModel>()
     private val allItems = mutableListOf<Any>()
     private var loadingFlag = false
+    private var highlightedClub: Club? = null
 
     override fun getItemCount() = allItems.size
 
@@ -80,6 +85,12 @@ class FlightsAdapter @Inject constructor(
         allItems.clear()
         var lastDate : LocalDate? = null
         flights.forEach {
+            it.background = null
+            highlightedClub?.apply {
+                if (it.club == name) {
+                    it.background = highlightedBackground
+                }
+            }
             if (lastDate == null || !it.date.isEqual(lastDate)) {
                 lastDate = it.date
                 allItems.add(DateHeaderViewModel(dateFormatter.format(it.date)))
@@ -90,6 +101,11 @@ class FlightsAdapter @Inject constructor(
             allItems.add(LoaderViewModel)
         }
         notifyDataSetChanged()
+    }
+
+    fun setHighlightedClub(club: Club?) {
+        highlightedClub = club
+        reloadAllItems()
     }
 
     object ViewTypes {

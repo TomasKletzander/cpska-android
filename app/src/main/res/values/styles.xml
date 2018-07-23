@@ -43,4 +43,13 @@
         <item name="android:background">@color/headerBg</item>
     </style>
 
+    <style name="Text.Flights.Settings.Title" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Text.Flights.Settings.Label" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
+    <style name="Text.Club.Dropdown" parent="Base.TextAppearance.AppCompat.Subhead"/>
+
 </resources>

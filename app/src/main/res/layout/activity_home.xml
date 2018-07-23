@@ -35,6 +35,8 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inAnimation="@anim/tab_in"
+                android:outAnimation="@anim/tab_out"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <include android:id="@+id/flights" layout="@layout/coord_flights"/>
@@ -44,7 +46,15 @@
                 <FrameLayout
                     android:id="@+id/profile"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Tato sekce není hotová"/>
+
+                </FrameLayout>
 
             </ViewAnimator>
 
