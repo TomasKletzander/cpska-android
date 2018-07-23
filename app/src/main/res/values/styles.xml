@@ -14,8 +14,8 @@
 
     <style name="AppTheme.Splash">
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/textStrong</item>
+        <item name="android:navigationBarColor">@color/textStrong</item>
     </style>
 
     <style name="AppThemeOverlay.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
