@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/flightRowHeight"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@{viewModel.background}">
 
         <ImageView
             android:layout_width="@dimen/rowProfilePictureSize"
@@ -37,7 +39,8 @@
                 android:ellipsize="end"
                 android:text="@{viewModel.name}"
                 style="@style/Text.Flights.Name"
-                tools:text="Tomas Kletzander"/>
+                tools:text="Tomas Kletzander"
+                app:font="@{@string/fontDecorative}"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

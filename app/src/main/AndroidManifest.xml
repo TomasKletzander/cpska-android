@@ -16,7 +16,8 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:label="@string/appName"
-            android:theme="@style/AppTheme.Splash">
+            android:theme="@style/AppTheme.Splash"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +26,8 @@
 
         <activity
             android:name=".ui.home.HomeActivity"
-            android:label="@string/appTitle"></activity>
+            android:label="@string/appTitle"
+            android:screenOrientation="userPortrait"></activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

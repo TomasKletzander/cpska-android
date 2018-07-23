@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">#164CAF</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#d50000</color>
     <color name="profileIconTint">#DCE3F0</color>
     <color name="headerBg">#DCE3F0</color>
+    <color name="light">#909090</color>
+    <color name="highlightBackground">#20d50000</color>
 </resources>

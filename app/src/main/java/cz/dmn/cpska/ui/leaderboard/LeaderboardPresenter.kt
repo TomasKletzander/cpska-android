@@ -20,10 +20,10 @@ class LeaderboardPresenter @Inject constructor() : BaseMvpPresenter<LeaderboardM
         view?.apply {
             //  TODO: Replace with real API call
             val rows = mutableListOf<LeaderboardRow>()
-            rows.add(LeaderboardRow(1, 1000, User(3080, "Tomas Kletzander"), Club("Medlanky")))
-            rows.add(LeaderboardRow(2, 999, User(1, "Franta Kocourek"), Club("Krizanov")))
-            rows.add(LeaderboardRow(3, 998, User(2, "Jan Novak"), Club("Pribyslav")))
-            rows.add(LeaderboardRow(4, 997, User(3, "Adam Jandora"), Club("Medlanky")))
+            rows.add(LeaderboardRow(1, 1000, User(3080, "Tomas Kletzander"), Club(0, "Medlanky")))
+            rows.add(LeaderboardRow(2, 999, User(1, "Franta Kocourek"), Club(0, "Krizanov")))
+            rows.add(LeaderboardRow(3, 998, User(2, "Jan Novak"), Club(0, "Pribyslav")))
+            rows.add(LeaderboardRow(4, 997, User(3, "Adam Jandora"), Club(0, "Medlanky")))
             disposables.add(Observable.just(rows).delay(2000, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
                 show(it)
             })
