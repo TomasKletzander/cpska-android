@@ -26,10 +26,11 @@
             android:layout_marginEnd="@dimen/marginBig"
             android:layout_marginBottom="@dimen/marginBig"
             android:src="@drawable/settings"
+            android:tint="@color/textStrong"
             app:layout_anchor="@id/listFlights"
             app:layout_anchorGravity="bottom|end"
             app:layout_behavior="cz.dmn.cpska.util.ScrollAwareFabBehavior"
-            app:backgroundTint="@android:color/white"/>
+            app:backgroundTint="@color/colorPrimary"/>
 
         <FrameLayout
             android:id="@+id/settingsFrame"
@@ -76,9 +77,9 @@
                 android:padding="@dimen/marginSmall"
                 android:layout_margin="@dimen/marginSmall"
                 android:src="@drawable/close"
-                android:tint="@color/light"
+                android:tint="@color/textLight"
                 android:onClickListener="@{closeSettingsListener}"
-                android:background="?selectableItemBackground"/>
+                android:background="?selectableItemBackground" />
 
         </FrameLayout>
 

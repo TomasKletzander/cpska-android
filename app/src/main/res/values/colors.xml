@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#164CAF</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#d50000</color>
-    <color name="profileIconTint">#DCE3F0</color>
-    <color name="headerBg">#DCE3F0</color>
+    <color name="colorPrimary">#76788D</color>
+    <color name="colorPrimaryDark">#8A8AA0</color>
+    <color name="colorAccent">#9E7671</color>
+
+    <color name="textStrong">#EDE4DB</color>
+    <color name="textLight">#c0c0c0</color>
+
+    <color name="profileIconTint">#E6D9D7</color>
+    <color name="headerBg">#E6D9D7</color>
     <color name="light">#909090</color>
     <color name="highlightBackground">#20d50000</color>
 </resources>

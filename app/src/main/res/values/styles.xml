@@ -1,18 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textStrong</item>
+        <item name="android:textColorSecondary">@color/textLight</item>
+        <item name="android:windowBackground">@drawable/blurred_background</item>
     </style>
 
     <style name="AppTheme.Splash">
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/textStrong</item>
+        <item name="android:navigationBarColor">@color/textStrong</item>
     </style>
 
     <style name="AppThemeOverlay.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -41,6 +44,7 @@
 
     <style name="Text.Header.Date" parent="Base.TextAppearance.AppCompat.Caption">
         <item name="android:background">@color/headerBg</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="Text.Flights.Settings.Title" parent="Base.TextAppearance.AppCompat.Headline">
