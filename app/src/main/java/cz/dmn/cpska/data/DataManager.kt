@@ -13,8 +13,6 @@ class DataManager @Inject constructor(
     private val flightDataSource: FlightHtmlDataSource,
     private val clubsDataSource: ClubsHtmlDataSource
 ) {
-
     fun getFlights(page: Int): Observable<List<FlightData>> = flightDataSource.getPage(page)
-
     fun getClubs(): Observable<List<Club>> = clubsDataSource.getClubs()
 }

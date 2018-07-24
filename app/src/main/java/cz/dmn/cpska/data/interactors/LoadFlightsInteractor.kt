@@ -5,6 +5,6 @@ import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.mvp.BasePagedDataInteractor
 import javax.inject.Inject
 
-class LoadFlightsInteractor @Inject constructor(private val dataManager: DataManager) : BasePagedDataInteractor<List<FlightData>>() {
+class LoadFlightsInteractor @Inject constructor(private val dataManager: DataManager) : BasePagedDataInteractor<FlightData>() {
     override fun buildInteractorObservable() = dataManager.getFlights(page)
 }
