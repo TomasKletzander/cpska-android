@@ -13,6 +13,7 @@ import cz.dmn.cpska.databinding.ActivityHomeBinding
 import cz.dmn.cpska.extensions.setTypeface
 import cz.dmn.cpska.mvp.TabbedCoordinator
 import cz.dmn.cpska.ui.BaseActivity
+import cz.dmn.cpska.ui.competitions.CompetitionsCoordinator
 import cz.dmn.cpska.ui.flights.FlightsCoordinator
 import cz.dmn.cpska.ui.leaderboard.LeaderboardCoordinator
 import dagger.Lazy
@@ -27,7 +28,8 @@ class HomeActivity : BaseActivity() {
     object Tabs {
         val Flights = 0
         val Leaderboard = 1
-        val Profile = 2
+        val Competitions = 2
+        val Profile = 3
     }
 
     lateinit var binding: ActivityHomeBinding
@@ -35,12 +37,15 @@ class HomeActivity : BaseActivity() {
     val leaderboardCoordinator by lazy { leaderboardCoordinatorLazy.get() }
     @Inject lateinit var flightsCoordinatorLazy: Lazy<FlightsCoordinator>
     val flightsCoordinator by lazy { flightsCoordinatorLazy.get() }
+    @Inject lateinit var competitionsCoordinatorLazy: Lazy<CompetitionsCoordinator>
+    val competitionsCoordinator by lazy { competitionsCoordinatorLazy.get() }
 
     private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigationProfile -> binding.content.setDisplayedChild(Tabs.Profile)
-            R.id.navigationLeaderboard -> binding.content.setDisplayedChild(Tabs.Leaderboard)
-            R.id.navigationFlights -> binding.content.setDisplayedChild(Tabs.Flights)
+            R.id.navigationProfile -> binding.content.displayedChild = Tabs.Profile
+            R.id.navigationLeaderboard -> binding.content.displayedChild = Tabs.Leaderboard
+            R.id.navigationFlights -> binding.content.displayedChild = Tabs.Flights
+            R.id.navigationCompetitions -> binding.content.displayedChild = Tabs.Competitions
         }
         invalidateOptionsMenu()
         true
@@ -82,6 +87,7 @@ class HomeActivity : BaseActivity() {
         return when (view) {
             binding.leaderboard?.root -> leaderboardCoordinator
             binding.flights?.root -> flightsCoordinator
+            binding.competitions?.root -> competitionsCoordinator
             else -> null
         }
     }

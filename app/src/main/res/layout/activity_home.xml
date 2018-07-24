@@ -43,6 +43,8 @@
 
                 <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
 
+                <include android:id="@+id/competitions" layout="@layout/coord_competitions"/>
+
                 <FrameLayout
                     android:id="@+id/profile"
                     android:layout_width="match_parent"
