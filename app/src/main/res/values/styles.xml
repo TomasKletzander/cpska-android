@@ -61,4 +61,8 @@
 
     <style name="Text.Club.Dropdown" parent="Base.TextAppearance.AppCompat.Subhead"/>
 
+    <style name="Text.Competitions.Name" parent="Base.TextAppearance.AppCompat.Subhead"/>
+
+    <style name="Text.Competitions.Categories" parent="Base.TextAppearance.AppCompat.Caption"/>
+
 </resources>

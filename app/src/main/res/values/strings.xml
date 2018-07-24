@@ -16,4 +16,5 @@
     <string name="labelClubToHighlight">Zvýraznit aeroklub:</string>
     <string name="noClubToHighlight">Žádný</string>
     <string name="pointsAbbrev">b</string>
+    <string name="competitions">Závody</string>
 </resources>

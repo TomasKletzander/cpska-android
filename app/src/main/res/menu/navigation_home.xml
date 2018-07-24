@@ -12,6 +12,11 @@
         android:title="@string/titleLeaderboard" />
 
     <item
+        android:id="@+id/navigationCompetitions"
+        android:icon="@drawable/podium"
+        android:title="@string/competitions"/>
+
+    <item
         android:id="@+id/navigationProfile"
         android:icon="@drawable/account_card_details"
         android:title="@string/titleProfile" />

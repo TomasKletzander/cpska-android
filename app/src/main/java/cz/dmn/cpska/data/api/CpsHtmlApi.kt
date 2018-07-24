@@ -12,4 +12,7 @@ interface CpsHtmlApi {
 
     @GET("/public/index3.php?lpg=piloti")
     fun getClubs(): Observable<Response<ResponseBody>>
+
+    @GET("/public/index3.php?lpg=souteze")
+    fun getCompetitions(): Observable<Response<ResponseBody>>
 }
