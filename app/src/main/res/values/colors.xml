@@ -10,5 +10,5 @@
     <color name="profileIconTint">#E6D9D7</color>
     <color name="headerBg">#E6D9D7</color>
     <color name="light">#909090</color>
-    <color name="highlightBackground">#20d50000</color>
+    <color name="highlightBackground">#30d50000</color>
 </resources>
