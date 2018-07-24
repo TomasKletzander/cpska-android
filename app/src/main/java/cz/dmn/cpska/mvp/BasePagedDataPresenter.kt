@@ -3,7 +3,7 @@ package cz.dmn.cpska.mvp
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import io.reactivex.disposables.Disposable
 
-open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interactor: BasePagedDataInteractor<List<D>>) : PagedDataPresenter<D, V>, BaseMvpPresenter<V>() {
+open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interactor: BasePagedDataInteractor<D>) : PagedDataPresenter<D, V>, BaseMvpPresenter<V>() {
     private var loading = false
     private var requestNextPageDisposable: Disposable? = null
 
@@ -21,6 +21,7 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interac
     override fun detachView() {
         requestNextPageDisposable?.dispose()
         requestNextPageDisposable = null
+        interactor.unsubscribe()
         super.detachView()
     }
 
