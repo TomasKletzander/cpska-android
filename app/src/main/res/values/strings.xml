@@ -15,4 +15,5 @@
     <string name="titleError">Ajaj!</string>
     <string name="labelClubToHighlight">Zvýraznit aeroklub:</string>
     <string name="noClubToHighlight">Žádný</string>
+    <string name="pointsAbbrev">b</string>
 </resources>

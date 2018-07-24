@@ -10,12 +10,17 @@
         <item name="android:textColorPrimary">@color/textStrong</item>
         <item name="android:textColorSecondary">@color/textLight</item>
         <item name="android:windowBackground">@drawable/blurred_background</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.Splash">
         <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:statusBarColor">@color/textStrong</item>
         <item name="android:navigationBarColor">@color/textStrong</item>
+    </style>
+
+    <style name="AppThemeOverlay.Navigator" parent="AppTheme">
+        <item name="colorPrimary">@color/textStrong</item>
     </style>
 
     <style name="AppThemeOverlay.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -38,13 +43,13 @@
 
     <style name="Text.Flights.Points" parent="Base.TextAppearance.AppCompat.Subhead">
         <item name="android:background">@drawable/points_bg</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="Text.Header.Date" parent="Base.TextAppearance.AppCompat.Caption">
-        <item name="android:background">@color/headerBg</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@color/headerBg</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Flights.Settings.Title" parent="Base.TextAppearance.AppCompat.Headline">

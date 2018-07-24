@@ -25,6 +25,7 @@ import cz.dmn.cpska.mvp.BaseMvpCoordinator
 import cz.dmn.cpska.mvp.TabbedCoordinator
 import cz.dmn.cpska.ui.common.ClubsAdapter
 import cz.dmn.cpska.ui.common.ClubsAdapter_Factory
+import dagger.Lazy
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import javax.inject.Inject
@@ -32,18 +33,14 @@ import javax.inject.Inject
 @PerActivity
 class FlightsCoordinator @Inject constructor(
     @ByActivity private val context: Context,
-    private val adapter: FlightsAdapter,
+    private val adapterLazy: Lazy<FlightsAdapter>,
     private val binding: CoordFlightsBinding,
     @ByActivity private val menuInflater: MenuInflater,
     private val settingsModel: FlightsSettingsModel,
     private val clubsAdapter: ClubsAdapter
 ) : TabbedCoordinator<FlightsMvp.View, FlightsMvp.Presenter>(), FlightsMvp.View {
 
-    init {
-        settingsModel.selectedClubSubject.subscribe {
-            adapter.setHighlightedClub(it.data)
-        }
-    }
+    val adapter by lazy { adapterLazy.get() }
 
     var settingsFrameOffset = 0f
 
@@ -67,6 +64,10 @@ class FlightsCoordinator @Inject constructor(
                     (binding.settingsFrame.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
             binding.settingsFrame.translationY = settingsFrameOffset
             binding.settingsFrame.visibility = View.GONE
+        }
+
+        settingsModel.selectedClubSubject.subscribe {
+            adapter.setHighlightedClub(it.data)
         }
     }
 

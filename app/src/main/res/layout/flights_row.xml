@@ -11,18 +11,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/flightRowHeight"
+        android:paddingStart="@dimen/marginBig"
+        android:paddingEnd="@dimen/marginBig"
         android:orientation="horizontal"
         android:background="@{viewModel.background}">
 
-        <ImageView
-            android:layout_width="@dimen/rowProfilePictureSize"
-            android:layout_height="@dimen/rowProfilePictureSize"
-            android:layout_marginStart="@dimen/marginBig"
+        <TextView
+            android:layout_width="@dimen/flightPointsWidth"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/marginStandard"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/account_circle"
-            android:tint="@color/profileIconTint"
-            android:tintMode="src_in"/>
+            android:textAlignment="center"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="@{viewModel.points}"
+            style="@style/Text.Flights.Points"
+            tools:text="1000"/>
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="@dimen/rowProfilePictureSize"
+            android:layout_height="@dimen/rowProfilePictureSize"
+            android:layout_marginEnd="@dimen/marginStandard"
+            android:layout_gravity="center_vertical"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,18 +107,6 @@
                 tools:text="98 km/h"/>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="@dimen/flightPointsWidth"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/marginBig"
-            android:layout_gravity="center_vertical"
-            android:textAlignment="center"
-            android:lines="1"
-            android:ellipsize="end"
-            android:text="@{viewModel.points}"
-            style="@style/Text.Flights.Points"
-            tools:text="1000"/>
 
     </LinearLayout>
 

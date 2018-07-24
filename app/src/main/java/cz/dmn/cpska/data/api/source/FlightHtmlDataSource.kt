@@ -1,5 +1,6 @@
 package cz.dmn.cpska.data.api.source
 
+import android.util.Log
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.CpsHtmlApi
 import cz.dmn.cpska.data.api.FlightData
@@ -9,6 +10,7 @@ import cz.dmn.cpska.di.PerApplication
 import io.reactivex.Observable
 import org.joda.time.format.DateTimeFormat
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 import javax.inject.Inject
 
 @PerApplication
@@ -16,6 +18,14 @@ class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) {
 
     companion object {
         val dateFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+
+        fun extractIdFromInnerHref(td: Element): Int {
+            val links = td.getElementsByTag("a")
+            if (links.size == 0) return 0
+            val href = links[0].attr("href")
+            val parts = href.split("=")
+            return parts.lastOrNull()?.toInt() ?: 0
+        }
     }
 
     fun getPage(pageIndex: Int): Observable<List<FlightData>> = api.getFlights(pageIndex * 100)
@@ -26,11 +36,13 @@ class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) {
                     it.hasClass("rowEven") || it.hasClass("rowOdd")
                 }.map {
                     val cells = it.getElementsByTag("td")
+                    val id = extractIdFromInnerHref(cells[10])
                     val date = dateFormatter.parseLocalDate(cells[0].child(0).ownText())
                     val country = cells[2].ownText()
                     val pointsText = cells[3].ownText().split(" ")[0]
                     val points = if (pointsText.isEmpty()) 0 else pointsText.toInt()
                     val userName = cells[4].child(0).ownText()
+                    val userId = extractIdFromInnerHref(cells[4])
                     val distanceText = cells[5].ownText().split(" ")[0]
                     var distance : Float
                     try {
@@ -47,7 +59,7 @@ class FlightHtmlDataSource @Inject constructor(private val api: CpsHtmlApi) {
                     }
                     val clubName = cells[7].ownText()
                     val planeName = cells[8].ownText()
-                    FlightData(date, country, points, User(0, userName), distance, speed, Club(0, clubName), Plane(planeName))
+                    FlightData(id, date, country, points, User(userId, userName), distance, speed, Club(0, clubName), Plane(planeName))
                 }
             }
 }

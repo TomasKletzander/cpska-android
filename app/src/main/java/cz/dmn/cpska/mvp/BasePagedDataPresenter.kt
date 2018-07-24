@@ -51,7 +51,7 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interac
             override fun onError(e: Throwable) {
                 view?.apply {
                     loading = false
-                    showError("To be changed")
+                    showError(e.localizedMessage)
                 }
             }
         })
