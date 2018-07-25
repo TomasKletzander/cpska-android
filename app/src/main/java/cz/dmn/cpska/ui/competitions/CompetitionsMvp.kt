@@ -7,16 +7,9 @@ import io.reactivex.subjects.Subject
 
 interface CompetitionsMvp {
 
-    interface View: MvpView {
-
-        var loading: Boolean
-        val refreshSubject: Subject<Any>
+    interface View : MvpView {
         fun show(competitions: List<Competition>)
-        fun error(message: String)
     }
 
-    interface Presenter: MvpPresenter<View> {
-
-        fun load()
-    }
+    interface Presenter : MvpPresenter<View>
 }

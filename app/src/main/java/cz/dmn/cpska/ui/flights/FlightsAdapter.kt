@@ -41,9 +41,6 @@ class FlightsAdapter @Inject constructor(
     private val allItems = mutableListOf<AdapterItem>()
     private var loadingFlag = false
     private var highlightedClub: Club? = null
-    private val profilePlaceholder: Drawable? = VectorDrawableCompat.create(res, R.drawable.account_circle, null)?.also {
-        it.setTint(res.getColor(R.color.textStrong))
-    }
 
     override fun getItemCount() = allItems.size
 
@@ -56,7 +53,7 @@ class FlightsAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ViewTypes.Flight -> FlightRowViewHolder(FlightsRowBinding.inflate(layoutInflater, parent, false), profilePlaceholder)
+            ViewTypes.Flight -> FlightRowViewHolder(FlightsRowBinding.inflate(layoutInflater, parent, false))
             ViewTypes.Loader -> LoaderViewHolder(LoaderRowBinding.inflate(layoutInflater, parent, false))
             ViewTypes.Header -> DateHeaderViewHolder(DateHeaderRowBinding.inflate(layoutInflater, parent, false))
             else -> throw RuntimeException("Unexpected type")
