@@ -26,9 +26,6 @@ class AppModule(private val app: CpsApp) {
     fun provideResources(): Resources = app.resources
 
     @Provides
-    fun provideClubs(): List<Club> = app.clubs
-
-    @Provides
     @HighlightedBackground
     fun provideHighlightedBackground(@ByApplication res: Resources): Drawable = ColorDrawable(res.getColor(R.color.highlightBackground))
 

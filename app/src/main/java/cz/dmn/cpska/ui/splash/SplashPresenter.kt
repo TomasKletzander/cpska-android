@@ -4,12 +4,10 @@ import cz.dmn.cpska.CpsApp
 import cz.dmn.cpska.R
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
-import cz.dmn.cpska.ui.home.HomeNavigator
-import io.reactivex.Observable
+import cz.dmn.cpska.navigators.HomeNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @PerActivity

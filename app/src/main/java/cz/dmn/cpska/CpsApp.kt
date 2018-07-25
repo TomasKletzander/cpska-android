@@ -2,10 +2,14 @@ package cz.dmn.cpska
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import cz.dmn.cpska.data.DataManager
+import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
+import cz.dmn.cpska.data.api.Competition
+import cz.dmn.cpska.data.api.User
 import cz.dmn.cpska.di.AppModule
 import cz.dmn.cpska.di.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -19,7 +23,8 @@ class CpsApp : Application(), HasActivityInjector {
 
     @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var dataManager: DataManager
-    val clubs = mutableListOf<Club>()
+    @Inject lateinit var clubsCache: MemoryCache<List<Club>>
+    @Inject lateinit var competitionsCache: MemoryCache<List<Competition>>
 
     override fun onCreate() {
         super.onCreate()
@@ -30,9 +35,15 @@ class CpsApp : Application(), HasActivityInjector {
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
-    fun initialize(): Observable<Boolean> = dataManager.getClubs().map {
-        clubs.clear()
-        clubs.addAll(it)
-        true
-    }
+    fun initialize(): Observable<Boolean> =
+        dataManager.getClubs().map {
+            clubsCache.data = it
+            it
+        }.flatMap {
+            dataManager.getCompetitions()
+        }.map {
+            competitionsCache.data = it
+        }.map {
+            true
+        }.onErrorReturnItem(false)
 }

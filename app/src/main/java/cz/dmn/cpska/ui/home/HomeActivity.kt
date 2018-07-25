@@ -10,6 +10,7 @@ import com.squareup.coordinators.Coordinator
 import com.squareup.coordinators.Coordinators
 import cz.dmn.cpska.R
 import cz.dmn.cpska.databinding.ActivityHomeBinding
+import cz.dmn.cpska.extensions.removeShiftMode
 import cz.dmn.cpska.extensions.setTypeface
 import cz.dmn.cpska.mvp.TabbedCoordinator
 import cz.dmn.cpska.ui.BaseActivity
@@ -61,6 +62,7 @@ class HomeActivity : BaseActivity() {
         binding.toolbar.setTypeface(resources.getString(R.string.fontDecorative))
 
         binding.navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
+        binding.navigation.removeShiftMode()
 
         Coordinators.installBinder(binding.content, this::bindCoordinators)
     }
