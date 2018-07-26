@@ -27,7 +27,12 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/appTitle"
-            android:screenOrientation="userPortrait"></activity>
+            android:screenOrientation="userPortrait"/>
+
+        <activity
+            android:name=".ui.competition.CompetitionActivity"
+            android:label="@string/appTitle"
+            android:screenOrientation="userPortrait"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
