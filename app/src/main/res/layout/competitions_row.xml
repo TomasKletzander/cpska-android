@@ -13,7 +13,8 @@
         android:layout_height="@dimen/competitionRowHeight"
         android:paddingStart="@dimen/marginBig"
         android:paddingEnd="@dimen/marginBig"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="?selectableItemBackground">
 
         <LinearLayout
             android:layout_width="0dp"

@@ -1,6 +1,10 @@
 package cz.dmn.cpska.data.api
 
-data class Competition(
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
+
+@Parcel(Parcel.Serialization.BEAN)
+data class Competition @ParcelConstructor constructor(
     val id: Int,
     val name: String,
     val categories: String,
