@@ -1,7 +1,6 @@
 package cz.dmn.cpska.ui.flights
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.support.design.widget.Snackbar
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.support.v7.widget.LinearLayoutManager
@@ -11,20 +10,16 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import com.brandongogetap.stickyheaders.StickyLayoutManager
 import cz.dmn.cpska.R
-import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.CoordFlightsBinding
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.di.ByActivity
-import cz.dmn.cpska.di.FlightsPreferences
 import cz.dmn.cpska.extensions.addOneShotGlobalLayoutListener
-import cz.dmn.cpska.mvp.BaseMvpCoordinator
 import cz.dmn.cpska.mvp.TabbedCoordinator
+import cz.dmn.cpska.ui.ItemClickListener
 import cz.dmn.cpska.ui.common.ClubsAdapter
-import cz.dmn.cpska.ui.common.ClubsAdapter_Factory
 import dagger.Lazy
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -34,18 +29,16 @@ import javax.inject.Inject
 class FlightsCoordinator @Inject constructor(
     @ByActivity private val context: Context,
     private val adapterLazy: Lazy<FlightsAdapter>,
-    private val binding: CoordFlightsBinding,
     @ByActivity private val menuInflater: MenuInflater,
     private val settingsModel: FlightsSettingsModel,
     private val clubsAdapter: ClubsAdapter
-) : TabbedCoordinator<FlightsMvp.View, FlightsMvp.Presenter>(), FlightsMvp.View {
+) : TabbedCoordinator<FlightsMvp.View, FlightsMvp.Presenter, CoordFlightsBinding>(), FlightsMvp.View, ItemClickListener<FlightData> {
 
     val adapter by lazy { adapterLazy.get() }
 
     var settingsFrameOffset = 0f
 
-    override fun attach(view: View) {
-        super.attach(view)
+    override fun onAttach() {
         binding.adapter = adapter
         binding.settingsModel = settingsModel
         binding.listFlights.layoutManager = StickyLayoutManager(context, adapter).also {
@@ -105,6 +98,12 @@ class FlightsCoordinator @Inject constructor(
             }
             else -> false
         }
+    }
+
+    override val requestOpenFlight: Subject<FlightData> = PublishSubject.create()
+
+    override fun onItemClicked(item: FlightData) {
+        requestOpenFlight.onNext(item)
     }
 
     private fun showSettings() {

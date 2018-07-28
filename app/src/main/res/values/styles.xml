@@ -65,4 +65,48 @@
 
     <style name="Text.Competitions.Categories" parent="Base.TextAppearance.AppCompat.Caption"/>
 
+    <style name="SectionFrame">
+        <item name="android:background">@drawable/section_bg</item>
+        <item name="android:layout_marginLeft">@dimen/marginBig</item>
+        <item name="android:layout_marginTop">@dimen/marginBig</item>
+        <item name="android:layout_marginRight">@dimen/marginBig</item>
+        <item name="android:padding">@dimen/marginBig</item>
+    </style>
+
+    <style name="Text.FlightInfo.Pilot" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.FlightInfo.Club" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.FlightInfo.Plane" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.FlightInfo.Distance" parent="Base.TextAppearance.AppCompat.Caption">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.FlightInfo.Speed" parent="Base.TextAppearance.AppCompat.Caption">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.FlightInfo.Points" parent="Base.TextAppearance.AppCompat.Caption">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Clubs.Name" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>

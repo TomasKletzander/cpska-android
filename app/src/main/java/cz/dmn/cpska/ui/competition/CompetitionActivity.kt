@@ -16,8 +16,6 @@ class CompetitionActivity : BaseActivity() {
     private lateinit var binding: ActivityCompetitionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_competition)
 

@@ -12,4 +12,8 @@
 
     <dimen name="competitionRowHeight">64dp</dimen>
     <dimen name="competitionFlagSize">24dp</dimen>
+
+    <dimen name="flightProfilePictureSize">64dp</dimen>
+
+    <dimen name="favoriteSize">48dp</dimen>
 </resources>

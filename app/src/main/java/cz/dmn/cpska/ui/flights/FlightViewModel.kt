@@ -6,7 +6,7 @@ import cz.dmn.cpska.R
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.ui.common.AdapterItem
 
-class FlightViewModel(apiData: FlightData, res: Resources) : AdapterItem {
+class FlightViewModel(val apiData: FlightData, res: Resources) : AdapterItem {
 
     val id = apiData.id
     val date = apiData.date

@@ -12,9 +12,9 @@
         android:title="@string/titleLeaderboard" />
 
     <item
-        android:id="@+id/navigationCompetitions"
+        android:id="@+id/navigationClubs"
         android:icon="@drawable/podium"
-        android:title="@string/competitions"/>
+        android:title="@string/titleClubs"/>
 
     <item
         android:id="@+id/navigationProfile"

@@ -1,17 +1,12 @@
 package cz.dmn.cpska.ui.flights
 
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.support.graphics.drawable.VectorDrawableCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
-import cz.dmn.cpska.R
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.DateHeaderRowBinding
@@ -20,6 +15,7 @@ import cz.dmn.cpska.databinding.LoaderRowBinding
 import cz.dmn.cpska.di.ByActivity
 import cz.dmn.cpska.di.HighlightedBackground
 import cz.dmn.cpska.di.PerActivity
+import cz.dmn.cpska.ui.ItemClickListener
 import cz.dmn.cpska.ui.common.AdapterItem
 import cz.dmn.cpska.ui.common.DateHeaderViewHolder
 import cz.dmn.cpska.ui.common.DateHeaderViewModel
@@ -34,7 +30,8 @@ class FlightsAdapter @Inject constructor(
     private val layoutInflater: LayoutInflater,
     private val dateFormatter: RecentDateFormatter,
     @HighlightedBackground private val highlightedBackground: Drawable,
-    @ByActivity private val res: Resources
+    @ByActivity private val res: Resources,
+    private val flightClickListener: ItemClickListener<FlightData>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderHandler {
 
     private val flights = mutableListOf<FlightData>()
@@ -53,7 +50,7 @@ class FlightsAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ViewTypes.Flight -> FlightRowViewHolder(FlightsRowBinding.inflate(layoutInflater, parent, false))
+            ViewTypes.Flight -> FlightRowViewHolder(FlightsRowBinding.inflate(layoutInflater, parent, false), flightClickListener)
             ViewTypes.Loader -> LoaderViewHolder(LoaderRowBinding.inflate(layoutInflater, parent, false))
             ViewTypes.Header -> DateHeaderViewHolder(DateHeaderRowBinding.inflate(layoutInflater, parent, false))
             else -> throw RuntimeException("Unexpected type")

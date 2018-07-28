@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="cz.dmn.cpska.ui.clubs.ClubViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/marginBig"
+        android:paddingEnd="@dimen/marginBig"
+        android:paddingTop="@dimen/marginStandard"
+        android:paddingBottom="@dimen/marginStandard"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            style="@style/Text.Clubs.Name"
+            app:font="@{@string/fontDecorative}"
+            android:text="@{viewModel.clubName}"
+            tools:text="Medlanky"/>
+
+        <ImageView
+            android:layout_width="@dimen/favoriteSize"
+            android:layout_height="@dimen/favoriteSize"
+            android:padding="@dimen/marginStandard"
+            android:tint="@color/textStrong"
+            android:src="@{viewModel.favorite ? @drawable/heart : @drawable/heart_outline}"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="@{viewModel.toggleFavorite}"/>
+
+    </LinearLayout>
+
+</layout>

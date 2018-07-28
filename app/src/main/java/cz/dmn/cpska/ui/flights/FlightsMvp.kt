@@ -8,6 +8,8 @@ import io.reactivex.subjects.Subject
 interface FlightsMvp {
     interface View: PagedDataView<FlightData> {
         val requestRefresh: Subject<Any>
+        val requestOpenFlight: Subject<FlightData>
     }
+
     interface Presenter: PagedDataPresenter<FlightData, View>
 }

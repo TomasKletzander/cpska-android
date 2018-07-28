@@ -11,11 +11,10 @@ import cz.dmn.cpska.mvp.TabbedCoordinator
 import javax.inject.Inject
 
 @PerActivity
-class LeaderboardCoordinator @Inject constructor(private val adapter: LeaderboardAdapter, private val binding: CoordLeaderboardBinding)
-    : TabbedCoordinator<LeaderboardMvp.View, LeaderboardMvp.Presenter>(), LeaderboardMvp.View {
+class LeaderboardCoordinator @Inject constructor(private val adapter: LeaderboardAdapter)
+    : TabbedCoordinator<LeaderboardMvp.View, LeaderboardMvp.Presenter, CoordLeaderboardBinding>(), LeaderboardMvp.View {
 
-    override fun attach(view: View) {
-        super.attach(view)
+    override fun onAttach() {
         binding.adapter = adapter
     }
 

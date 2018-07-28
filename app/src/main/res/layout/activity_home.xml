@@ -43,7 +43,7 @@
 
                 <include android:id="@+id/leaderboard" layout="@layout/coord_leaderboard"/>
 
-                <include android:id="@+id/competitions" layout="@layout/coord_competitions"/>
+                <include android:id="@+id/clubs" layout="@layout/coord_clubs"/>
 
                 <FrameLayout
                     android:id="@+id/profile"

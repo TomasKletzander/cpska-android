@@ -6,7 +6,7 @@ import cz.dmn.cpska.di.PerActivity
 import javax.inject.Inject
 
 @PerActivity
-class LoadCompetitionDetailsInteractor @Inject constructor(private val dataManager: DataManager)
+class CompetitionDetailsInteractor @Inject constructor(private val dataManager: DataManager)
     : BaseInteractor<CompetitionDetails>() {
 
     var competitionId: Int = 0

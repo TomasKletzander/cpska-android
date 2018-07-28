@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.verify
 import cz.dmn.cpska.data.api.source.ClubsHtmlDataSource
 import cz.dmn.cpska.data.api.source.CompetitionDetailsDataSource
 import cz.dmn.cpska.data.api.source.CompetitionsDataSource
+import cz.dmn.cpska.data.api.source.FlightDetailsDataSource
 import cz.dmn.cpska.data.api.source.FlightsHtmlDataSource
 import org.junit.Before
 import org.junit.Test
@@ -20,10 +21,17 @@ class DataManagerTest {
     @Mock lateinit var clubsDataSource: ClubsHtmlDataSource
     @Mock lateinit var competitionsDataSource: CompetitionsDataSource
     @Mock lateinit var competitionDetailsDataSource: CompetitionDetailsDataSource
+    @Mock lateinit var flightDetailsDataSource: FlightDetailsDataSource
 
     @Before
     fun setUp() {
-        dataManager = DataManager(flightsDataSource, clubsDataSource, competitionsDataSource, competitionDetailsDataSource)
+        dataManager = DataManager(
+                flightsDataSource,
+                clubsDataSource,
+                competitionsDataSource,
+                competitionDetailsDataSource,
+                flightDetailsDataSource
+        )
     }
 
     @Test
@@ -48,5 +56,11 @@ class DataManagerTest {
     fun getCompetitionDetails() {
         dataManager.getCompetitionDetails(1)
         verify(competitionDetailsDataSource).getCompetitionDetails(1)
+    }
+
+    @Test
+    fun getFlightDetails() {
+        dataManager.getFlightDetails(1)
+        verify(flightDetailsDataSource).getFlightDetails(1)
     }
 }
