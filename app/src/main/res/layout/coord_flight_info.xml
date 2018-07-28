@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="cz.dmn.cpska.ui.flight.info.FlightInfoViewModel"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/SectionFrame">
+
+                <ImageView
+                    android:layout_width="@dimen/flightProfilePictureSize"
+                    android:layout_height="@dimen/flightProfilePictureSize"
+                    android:layout_marginEnd="@dimen/marginBig"
+                    android:layout_gravity="top"
+                    app:roundImageUrl="@{viewModel.pilotImageUrl}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Text.FlightInfo.Pilot"
+                        app:font="@{@string/fontDecorative}"
+                        android:text="@{viewModel.pilotName}"
+                        tools:text="Jan Novak"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Text.FlightInfo.Club"
+                        android:text="@{viewModel.clubName}"
+                        tools:text="Medlanky"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Text.FlightInfo.Plane"
+                        android:text="@{viewModel.planeName}"
+                        tools:text="Astir CS"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Text.FlightInfo.Distance"
+                            android:text="@{viewModel.distance}"
+                            tools:text="456 km"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Text.FlightInfo.Speed"
+                            android:text="@{viewModel.speed}"
+                            tools:text="98 km/h"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Text.FlightInfo.Points"
+                            android:text="@{viewModel.points}"
+                            tools:text="560 b"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginBig"
+                android:layout_marginTop="@dimen/marginBig"
+                android:layout_marginRight="@dimen/marginBig"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{viewModel.mapImageUrl}"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginBig"
+                android:layout_marginTop="@dimen/marginBig"
+                android:layout_marginRight="@dimen/marginBig"
+                android:layout_marginBottom="@dimen/marginBig"
+                android:adjustViewBounds="true"
+                app:imageUrl="@{viewModel.profileImageUrl}"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

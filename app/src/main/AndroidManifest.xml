@@ -34,6 +34,11 @@
             android:label="@string/appTitle"
             android:screenOrientation="userPortrait"/>
 
+        <activity
+            android:name=".ui.flight.FlightActivity"
+            android:label="@string/appTitle"
+            android:screenOrientation="userPortrait"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="269380dbc21494c053f8cb3fb3370cd395bd4f82" />

@@ -6,7 +6,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import cz.dmn.cpska.data.api.Competition
 import cz.dmn.cpska.data.api.CompetitionDetails
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
-import cz.dmn.cpska.data.interactors.LoadCompetitionDetailsInteractor
+import cz.dmn.cpska.data.interactors.CompetitionDetailsInteractor
 import org.junit.Before
 import org.junit.Test
 
@@ -21,7 +21,7 @@ class CompetitionPresenterTest {
 
     lateinit var presenter: CompetitionPresenter
     @Mock lateinit var competition: Competition
-    @Mock lateinit var interactor: LoadCompetitionDetailsInteractor
+    @Mock lateinit var interactor: CompetitionDetailsInteractor
     @Mock lateinit var view: CompetitionMvp.View
     @Captor lateinit var subscriberCaptor: ArgumentCaptor<BaseInteractorSubscriber<CompetitionDetails>>
     @Mock lateinit var data: CompetitionDetails

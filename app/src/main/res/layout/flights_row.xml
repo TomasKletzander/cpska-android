@@ -14,7 +14,8 @@
         android:paddingStart="@dimen/marginBig"
         android:paddingEnd="@dimen/marginBig"
         android:orientation="horizontal"
-        android:background="@{viewModel.background}">
+        android:background="@{viewModel.background}"
+        android:foreground="?selectableItemBackground">
 
         <TextView
             android:layout_width="@dimen/flightPointsWidth"

@@ -2,6 +2,8 @@ package cz.dmn.cpska.di
 
 import cz.dmn.cpska.ui.competition.CompetitionActivity
 import cz.dmn.cpska.ui.competition.CompetitionModule
+import cz.dmn.cpska.ui.flight.FlightActivity
+import cz.dmn.cpska.ui.flight.FlightModule
 import cz.dmn.cpska.ui.home.HomeActivity
 import cz.dmn.cpska.ui.home.HomeModule
 import cz.dmn.cpska.ui.splash.SplashActivity
@@ -23,4 +25,8 @@ interface ActivityBindingModule {
     @PerActivity
     @ContributesAndroidInjector(modules = [CompetitionModule::class])
     fun contributeCompetitionActivityInjector(): CompetitionActivity
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = [FlightModule::class])
+    fun contributeFlightActivityInjector(): FlightActivity
 }

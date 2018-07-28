@@ -20,7 +20,7 @@ class CompetitionsAdapter @Inject constructor(private val inflater: LayoutInflat
     override fun getItemCount() = models.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            = CompetitionViewHolder(CompetitionsRowBinding.inflate(inflater, parent, false), clickListener)
+            = CompetitionViewHolder(CompetitionsRowBinding.inflate(inflater, parent, false))
 
     override fun onBindViewHolder(holder: CompetitionViewHolder, position: Int) {
         holder.bind(models[position])
@@ -30,12 +30,4 @@ class CompetitionsAdapter @Inject constructor(private val inflater: LayoutInflat
         models.clear()
         models.addAll(newModels)
     }
-
-    private val clickListener = object : ItemClickListener<Competition> {
-        override fun onItemClicked(item: Competition) {
-            competitionClickSubject.onNext(item)
-        }
-    }
-
-    val competitionClickSubject: Subject<Competition> = PublishSubject.create()
 }

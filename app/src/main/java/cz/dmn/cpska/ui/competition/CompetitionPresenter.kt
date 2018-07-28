@@ -3,7 +3,7 @@ package cz.dmn.cpska.ui.competition
 import cz.dmn.cpska.data.api.Competition
 import cz.dmn.cpska.data.api.CompetitionDetails
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
-import cz.dmn.cpska.data.interactors.LoadCompetitionDetailsInteractor
+import cz.dmn.cpska.data.interactors.CompetitionDetailsInteractor
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
 import javax.inject.Inject
@@ -11,7 +11,7 @@ import javax.inject.Inject
 @PerActivity
 class CompetitionPresenter @Inject constructor(
     private val competition: Competition,
-    private val interactor: LoadCompetitionDetailsInteractor
+    private val interactor: CompetitionDetailsInteractor
 ) : BaseMvpPresenter<CompetitionMvp.View>(), CompetitionMvp.Presenter {
 
     override fun load() {

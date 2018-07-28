@@ -5,6 +5,7 @@
     <string name="titleProfile">Profil</string>
     <string name="titleLeaderboard">Pořadí</string>
     <string name="titleFlights">Lety</string>
+    <string name="titleClubs">Kluby</string>
 
     <string name="today">Dnes</string>
     <string name="yesterday">Včera</string>
@@ -17,4 +18,9 @@
     <string name="noClubToHighlight">Žádný</string>
     <string name="pointsAbbrev">b</string>
     <string name="competitions">Závody</string>
+    <string name="titleInformation">Informace</string>
+    <string name="distanceFormat">%.2f km</string>
+    <string name="speedFormat">%.2f km/h</string>
+    <string name="pointsFormat">%d b</string>
+    <string name="flight">Let</string>
 </resources>

@@ -29,8 +29,8 @@ android {
         applicationId "cz.dmn.cpska"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 3
-        versionName "0.2"
+        versionCode 5
+        versionName "0.4 development"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -64,7 +64,7 @@ dependencies {
     /////  Room
     def roomVersion = '1.1.1'
     implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
     // optional - RxJava support for Room
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
     // optional - Guava support for Room, including Optional and ListenableFuture

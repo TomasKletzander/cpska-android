@@ -18,4 +18,7 @@ interface CpsHtmlApi {
 
     @GET("/public/index3.php?lpg=souteze")
     fun getCompetitionDetails(@Query("soutezid") competitionId: Int): Observable<Response<ResponseBody>>
+
+    @GET("/public/index3.php?lpg=zobraz_let")
+    fun getFlightDetails(@Query("let_id") id: Int): Observable<Response<ResponseBody>>
 }

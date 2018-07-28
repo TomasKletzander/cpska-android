@@ -12,16 +12,11 @@ import cz.dmn.cpska.R
 import cz.dmn.cpska.databinding.ActivityHomeBinding
 import cz.dmn.cpska.extensions.removeShiftMode
 import cz.dmn.cpska.extensions.setTypeface
-import cz.dmn.cpska.mvp.TabbedCoordinator
 import cz.dmn.cpska.ui.BaseActivity
-import cz.dmn.cpska.ui.competitions.CompetitionsCoordinator
+import cz.dmn.cpska.ui.clubs.ClubsCoordinator
 import cz.dmn.cpska.ui.flights.FlightsCoordinator
 import cz.dmn.cpska.ui.leaderboard.LeaderboardCoordinator
 import dagger.Lazy
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_home.view.flights
-import kotlinx.android.synthetic.main.activity_home.view.leaderboard
-import kotlinx.android.synthetic.main.activity_home.view.profile
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity() {
@@ -29,7 +24,7 @@ class HomeActivity : BaseActivity() {
     object Tabs {
         val Flights = 0
         val Leaderboard = 1
-        val Competitions = 2
+        val Clubs = 2
         val Profile = 3
     }
 
@@ -38,22 +33,21 @@ class HomeActivity : BaseActivity() {
     val leaderboardCoordinator by lazy { leaderboardCoordinatorLazy.get() }
     @Inject lateinit var flightsCoordinatorLazy: Lazy<FlightsCoordinator>
     val flightsCoordinator by lazy { flightsCoordinatorLazy.get() }
-    @Inject lateinit var competitionsCoordinatorLazy: Lazy<CompetitionsCoordinator>
-    val competitionsCoordinator by lazy { competitionsCoordinatorLazy.get() }
+    @Inject lateinit var clubsCoordinatorLazy: Lazy<ClubsCoordinator>
+    val clubsCoordinator by lazy { clubsCoordinatorLazy.get() }
 
     private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigationProfile -> binding.content.displayedChild = Tabs.Profile
             R.id.navigationLeaderboard -> binding.content.displayedChild = Tabs.Leaderboard
             R.id.navigationFlights -> binding.content.displayedChild = Tabs.Flights
-            R.id.navigationCompetitions -> binding.content.displayedChild = Tabs.Competitions
+            R.id.navigationClubs -> binding.content.displayedChild = Tabs.Clubs
         }
         invalidateOptionsMenu()
         true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
@@ -86,10 +80,10 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun bindCoordinators(view: View): Coordinator? {
-        return when (view) {
-            binding.leaderboard?.root -> leaderboardCoordinator
-            binding.flights?.root -> flightsCoordinator
-            binding.competitions?.root -> competitionsCoordinator
+        return when (view.id) {
+            R.id.leaderboard -> leaderboardCoordinator
+            R.id.flights -> flightsCoordinator
+            R.id.clubs -> clubsCoordinator
             else -> null
         }
     }

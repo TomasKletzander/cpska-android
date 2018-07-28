@@ -11,4 +11,5 @@
     <color name="headerBg">#E6D9D7</color>
     <color name="light">#909090</color>
     <color name="highlightBackground">#30d50000</color>
+    <color name="sectionBg">#22EDE4DB</color>
 </resources>
