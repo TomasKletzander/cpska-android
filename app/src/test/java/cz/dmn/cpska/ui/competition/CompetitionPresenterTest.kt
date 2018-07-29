@@ -7,6 +7,7 @@ import cz.dmn.cpska.data.api.Competition
 import cz.dmn.cpska.data.api.CompetitionDetails
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import cz.dmn.cpska.data.interactors.CompetitionDetailsInteractor
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import org.junit.Before
 import org.junit.Test
 
@@ -29,7 +30,7 @@ class CompetitionPresenterTest {
     @Before
     fun setUp() {
         whenever(competition.id).thenReturn(1)
-        presenter = CompetitionPresenter(competition, interactor)
+        presenter = CompetitionPresenter(competition, interactor, EmptyPresenterState())
     }
 
     @Test

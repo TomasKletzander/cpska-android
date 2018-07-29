@@ -4,6 +4,8 @@ import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
+import cz.dmn.cpska.mvp.EmptyPresenterState
+import cz.dmn.cpska.mvp.PresenterState
 import cz.dmn.cpska.navigators.ClubNavigator
 import cz.dmn.cpska.util.FavoriteClubsManager
 import io.reactivex.disposables.CompositeDisposable
@@ -13,8 +15,9 @@ import javax.inject.Inject
 class ClubsPresenter @Inject constructor(
     private val clubsCache: MemoryCache<List<Club>>,
     private val clubNavigator: ClubNavigator,
-    private val favoriteClubsManager: FavoriteClubsManager
-) : BaseMvpPresenter<ClubsMvp.View>(), ClubsMvp.Presenter {
+    private val favoriteClubsManager: FavoriteClubsManager,
+    override val state: EmptyPresenterState
+) : BaseMvpPresenter<ClubsMvp.View, PresenterState<*>>(), ClubsMvp.Presenter {
 
     private val disposables = CompositeDisposable()
 

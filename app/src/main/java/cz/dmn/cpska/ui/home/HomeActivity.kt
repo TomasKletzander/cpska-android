@@ -21,31 +21,8 @@ import javax.inject.Inject
 
 class HomeActivity : BaseActivity() {
 
-    object Tabs {
-        val Flights = 0
-        val Leaderboard = 1
-        val Clubs = 2
-        val Profile = 3
-    }
-
     lateinit var binding: ActivityHomeBinding
-    @Inject lateinit var leaderboardCoordinatorLazy: Lazy<LeaderboardCoordinator>
-    val leaderboardCoordinator by lazy { leaderboardCoordinatorLazy.get() }
-    @Inject lateinit var flightsCoordinatorLazy: Lazy<FlightsCoordinator>
-    val flightsCoordinator by lazy { flightsCoordinatorLazy.get() }
-    @Inject lateinit var clubsCoordinatorLazy: Lazy<ClubsCoordinator>
-    val clubsCoordinator by lazy { clubsCoordinatorLazy.get() }
-
-    private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            //R.id.navigationProfile -> binding.content.displayedChild = Tabs.Profile
-            //R.id.navigationLeaderboard -> binding.content.displayedChild = Tabs.Leaderboard
-            R.id.navigationFlights -> binding.content.displayedChild = Tabs.Flights
-            R.id.navigationClubs -> binding.content.displayedChild = Tabs.Clubs
-        }
-        invalidateOptionsMenu()
-        true
-    }
+    @Inject lateinit var tabsManager: HomeTabsManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,36 +32,16 @@ class HomeActivity : BaseActivity() {
         binding.toolbar.setSubtitle(R.string.appSubtitle)
         binding.toolbar.setTypeface(resources.getString(R.string.fontDecorative))
 
-        binding.navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
-        binding.navigation.removeShiftMode()
-
-        Coordinators.installBinder(binding.content, this::bindCoordinators)
+        tabsManager.install(binding.content, binding.navigation)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-        when (binding.content.displayedChild) {
-            Tabs.Flights -> flightsCoordinator.onCreateOptionsMenu(menu)
-            Tabs.Leaderboard -> leaderboardCoordinator.onCreateOptionsMenu(menu)
-        }
-        return true
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.let { tabsManager.restoreState(it) }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (super.onOptionsItemSelected(item)) return true
-        return when (binding.content.displayedChild) {
-            Tabs.Flights -> flightsCoordinator.onOptionsItemSelected(item)
-            Tabs.Leaderboard -> leaderboardCoordinator.onOptionsItemSelected(item)
-            else -> false
-        }
-    }
-
-    private fun bindCoordinators(view: View): Coordinator? {
-        return when (view.id) {
-            R.id.leaderboard -> leaderboardCoordinator
-            R.id.flights -> flightsCoordinator
-            R.id.clubs -> clubsCoordinator
-            else -> null
-        }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        tabsManager.saveState(outState)
     }
 }

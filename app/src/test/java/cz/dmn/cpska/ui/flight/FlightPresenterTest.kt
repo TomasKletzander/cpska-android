@@ -32,12 +32,13 @@ class FlightPresenterTest {
     @Captor lateinit var subscriberCaptor: ArgumentCaptor<BaseInteractorSubscriber<FlightDetails>>
     @Mock lateinit var data: FlightDetails
     @Mock lateinit var flightInfoPresenter: FlightInfoPresenter
+    @Mock lateinit var presenterState: FlightPresenterState
     val flight = FlightData(1, LocalDate.now(), "cz", 10, User(1, "user"),
             100f, 90f, Club(1, "Medlanky"), Plane("Astir"))
 
     @Before
     fun setUp() {
-        presenter = FlightPresenter(interactor, flight, flightInfoPresenter)
+        presenter = FlightPresenter(interactor, flight, flightInfoPresenter, presenterState)
     }
 
     @Test

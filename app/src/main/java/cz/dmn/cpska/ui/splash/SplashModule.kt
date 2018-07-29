@@ -1,6 +1,6 @@
 package cz.dmn.cpska.ui.splash
 
-import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import cz.dmn.cpska.di.BaseActivityModule
 import dagger.Binds
 import dagger.Module
@@ -9,7 +9,7 @@ import dagger.Module
 interface SplashModule {
 
     @Binds
-    fun bindActivity(activity: SplashActivity): Activity
+    fun bindActivity(activity: SplashActivity): AppCompatActivity
 
     @Binds
     fun bindPresenter(presenter: SplashPresenter): SplashMvp.Presenter

@@ -3,6 +3,7 @@ package cz.dmn.cpska.ui.flight.info
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import cz.dmn.cpska.data.api.FlightDetails
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +19,7 @@ class FlightInfoPresenterTest {
 
     @Before
     fun setUp() {
-        presenter = FlightInfoPresenter()
+        presenter = FlightInfoPresenter(EmptyPresenterState())
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
 import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Competition
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,7 +23,7 @@ class CompetitionsPresenterTest {
     @Before
     fun setUp() {
         whenever(competitionsCache.data).thenReturn(data)
-        presenter = CompetitionsPresenter(competitionsCache)
+        presenter = CompetitionsPresenter(competitionsCache, EmptyPresenterState())
     }
 
     @Test

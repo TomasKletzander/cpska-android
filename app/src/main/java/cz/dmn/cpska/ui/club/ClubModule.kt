@@ -1,6 +1,6 @@
 package cz.dmn.cpska.ui.club
 
-import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.di.BaseActivityModule
 import cz.dmn.cpska.ui.flights.FlightsModule
@@ -22,5 +22,5 @@ abstract class ClubModule {
     }
 
     @Binds
-    abstract fun bindActivity(activity: ClubActivity): Activity
+    abstract fun bindActivity(activity: ClubActivity): AppCompatActivity
 }

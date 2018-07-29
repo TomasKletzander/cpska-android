@@ -8,6 +8,8 @@ import cz.dmn.cpska.data.interactors.FlightsInteractor
 import cz.dmn.cpska.di.ByActivity
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BasePagedDataPresenter
+import cz.dmn.cpska.mvp.BasePagedDataPresenterState
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import cz.dmn.cpska.navigators.FlightNavigator
 import cz.dmn.cpska.util.FavoriteClubsManager
 import io.reactivex.disposables.CompositeDisposable
@@ -18,7 +20,8 @@ class FlightsPresenter @Inject constructor(
     private val interactor: FlightsInteractor,
     private val flightNavigator: FlightNavigator,
     @ByActivity private val res: Resources,
-    private val favoriteClubsManager: FavoriteClubsManager
+    private val favoriteClubsManager: FavoriteClubsManager,
+    override val state: FlightsPresenterState
 ) : BasePagedDataPresenter<FlightData, Pair<FlightData, Boolean>, FlightsMvp.View>(interactor), FlightsMvp.Presenter {
 
     private var disposables = CompositeDisposable()

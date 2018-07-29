@@ -25,6 +25,7 @@ class FlightsPresenterTest {
     @Mock lateinit var view: FlightsMvp.View
     @Mock lateinit var res: Resources
     @Mock lateinit var favoriteClubsManager: FavoriteClubsManager
+    @Mock lateinit var presenyterState: FlightsPresenterState
     val openFlightSubject = PublishSubject.create<FlightData>()
     val requestNextPageSubject = PublishSubject.create<Any>()
     val requestRefreshSubject = PublishSubject.create<Any>()
@@ -38,7 +39,7 @@ class FlightsPresenterTest {
         whenever(view.requestRefresh).thenReturn(requestRefreshSubject)
         whenever(favoriteClubsManager.events).thenReturn(eventsSubject)
         whenever(res.getString(anyInt())).thenReturn("")
-        presenter = FlightsPresenter(interactor, flightNavigator, res, favoriteClubsManager)
+        presenter = FlightsPresenter(interactor, flightNavigator, res, favoriteClubsManager, presenyterState)
     }
 
     @Test

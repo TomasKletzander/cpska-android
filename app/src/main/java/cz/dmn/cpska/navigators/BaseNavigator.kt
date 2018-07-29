@@ -1,13 +1,10 @@
 package cz.dmn.cpska.navigators
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.support.v4.app.ActivityOptionsCompat
-import android.view.View
+import android.support.v7.app.AppCompatActivity
 import org.parceler.Parcels
 
-open class BaseNavigator(val activity: Activity) {
+open class BaseNavigator(val activity: AppCompatActivity) {
 
     fun startActivity(cls: Class<*>, vararg arguments: Pair<String, Any>) {
         activity.startActivity(Intent(activity, cls).also { applyIntentArguments(it, arguments) })

@@ -6,6 +6,8 @@ import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import cz.dmn.cpska.data.interactors.FlightDetailsInteractor
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
+import cz.dmn.cpska.mvp.EmptyPresenterState
+import cz.dmn.cpska.mvp.PresenterState
 import cz.dmn.cpska.ui.flight.info.FlightInfoPresenter
 import javax.inject.Inject
 
@@ -13,8 +15,9 @@ import javax.inject.Inject
 class FlightPresenter @Inject constructor(
     private val interactor: FlightDetailsInteractor,
     private val flight: FlightData,
-    private val flightInfoPresenter: FlightInfoPresenter
-) : BaseMvpPresenter<FlightMvp.View>(), FlightMvp.Presenter {
+    private val flightInfoPresenter: FlightInfoPresenter,
+    override val state: FlightPresenterState
+) : BaseMvpPresenter<FlightMvp.View, PresenterState<*>>(), FlightMvp.Presenter {
 
     override fun load() {
         interactor.flightId = flight.id
@@ -25,6 +28,7 @@ class FlightPresenter @Inject constructor(
             }
 
             override fun onNext(t: FlightDetails) {
+                state.flightDetails = t
                 view?.apply {
                     loading = false
                     show(t)
@@ -43,7 +47,14 @@ class FlightPresenter @Inject constructor(
 
     override fun attachView(view: FlightMvp.View) {
         super.attachView(view)
-        load()
+        state.flightDetails.let {
+            if (it == null) {
+                load()
+            } else {
+                view.show(it)
+                flightInfoPresenter.show(it)
+            }
+        }
     }
 
     override fun detachView() {
