@@ -38,8 +38,8 @@ class HomeActivity : BaseActivity() {
 
     private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigationProfile -> binding.content.displayedChild = Tabs.Profile
-            R.id.navigationLeaderboard -> binding.content.displayedChild = Tabs.Leaderboard
+            //R.id.navigationProfile -> binding.content.displayedChild = Tabs.Profile
+            //R.id.navigationLeaderboard -> binding.content.displayedChild = Tabs.Leaderboard
             R.id.navigationFlights -> binding.content.displayedChild = Tabs.Flights
             R.id.navigationClubs -> binding.content.displayedChild = Tabs.Clubs
         }

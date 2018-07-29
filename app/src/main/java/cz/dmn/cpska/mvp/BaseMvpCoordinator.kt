@@ -11,7 +11,9 @@ abstract class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V>, out VB: ViewDa
 
     @Inject lateinit var presenterLazy: Lazy<P>
     @Inject lateinit var viewLazy: Lazy<V>
-    val presenter by lazy { presenterLazy.get() }
+    val presenter by lazy {
+        presenterLazy.get()
+    }
     val view by lazy { viewLazy.get() }
     private lateinit var _binding: VB
     val binding: VB

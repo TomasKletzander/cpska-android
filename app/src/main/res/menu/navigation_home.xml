@@ -6,19 +6,19 @@
         android:icon="@drawable/format_list_bulleted"
         android:title="@string/titleFlights" />
 
-    <item
+    <!--<item
         android:id="@+id/navigationLeaderboard"
         android:icon="@drawable/medal"
-        android:title="@string/titleLeaderboard" />
+        android:title="@string/titleLeaderboard"/>-->
 
     <item
         android:id="@+id/navigationClubs"
         android:icon="@drawable/podium"
         android:title="@string/titleClubs"/>
 
-    <item
+    <!--<item
         android:id="@+id/navigationProfile"
         android:icon="@drawable/account_card_details"
-        android:title="@string/titleProfile" />
+        android:title="@string/titleProfile"/>-->
 
 </menu>

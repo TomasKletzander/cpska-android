@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable name="adapter" type="cz.dmn.cpska.ui.flights.FlightsAdapter"/>
-        <variable name="closeSettingsListener" type="android.view.View.OnClickListener"/>
-        <variable name="settingsModel" type="cz.dmn.cpska.ui.flights.FlightsSettingsModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -18,70 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adapter="@{adapter}" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/marginBig"
-            android:layout_marginBottom="@dimen/marginBig"
-            android:src="@drawable/settings"
-            android:tint="@color/textStrong"
-            app:layout_anchor="@id/listFlights"
-            app:layout_anchorGravity="bottom|end"
-            app:layout_behavior="cz.dmn.cpska.util.ScrollAwareFabBehavior"
-            app:backgroundTint="@color/colorPrimary"/>
-
-        <FrameLayout
-            android:id="@+id/settingsFrame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/marginStandard"
-            android:layout_gravity="bottom"
-            android:background="@drawable/white_rounded_bg"
-            android:elevation="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/marginBig"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/marginBig"
-                    style="@style/Text.Flights.Settings.Title"
-                    android:text="@string/titleFlightsSettings"
-                    app:font="@{@string/fontDecorative}"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Text.Flights.Settings.Label"
-                    android:text="@string/labelClubToHighlight"/>
-
-                <Spinner
-                    android:id="@+id/clubs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:onItemSelected="@{settingsModel.onClubSelectedListener}"
-                    app:selection="@{settingsModel.clubSelection}"/>
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:padding="@dimen/marginSmall"
-                android:layout_margin="@dimen/marginSmall"
-                android:src="@drawable/close"
-                android:tint="@color/textLight"
-                android:onClickListener="@{closeSettingsListener}"
-                android:background="?selectableItemBackground" />
-
-        </FrameLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

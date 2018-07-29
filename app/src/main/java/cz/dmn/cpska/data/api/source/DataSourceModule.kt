@@ -17,13 +17,13 @@ interface DataSourceModule {
 
     @PerApplication
     @Binds
-    fun bindFlightsDataSource(source: FlightsHtmlDataSource): FlightsDataSource
-
-    @PerApplication
-    @Binds
     fun bindCompetitionDetailsDataSource(source: CompetitionDetailsHtmlDataSource): CompetitionDetailsDataSource
 
     @PerApplication
     @Binds
     fun bindFlightDetailsDataSource(source: FlightDetailsHtmlDataSource): FlightDetailsDataSource
+
+    @PerApplication
+    @Binds
+    fun bindFlightsDataSource(source: FlightsHtmlDataSource): FlightsDataSource
 }

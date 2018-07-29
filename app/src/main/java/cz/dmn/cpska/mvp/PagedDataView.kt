@@ -4,8 +4,8 @@ import io.reactivex.subjects.Subject
 
 interface PagedDataView<in D> : MvpView {
     fun clear()
-    fun addPage(pageData: List<D>)
-    fun showError(message: String)
+    fun show(data: List<D>)
+    fun error(message: String)
     var loading: Boolean
     val requestNextPage: Subject<Any>
 }

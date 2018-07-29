@@ -1,5 +1,7 @@
 package cz.dmn.cpska.di
 
+import cz.dmn.cpska.ui.club.ClubActivity
+import cz.dmn.cpska.ui.club.ClubModule
 import cz.dmn.cpska.ui.competition.CompetitionActivity
 import cz.dmn.cpska.ui.competition.CompetitionModule
 import cz.dmn.cpska.ui.flight.FlightActivity
@@ -29,4 +31,8 @@ interface ActivityBindingModule {
     @PerActivity
     @ContributesAndroidInjector(modules = [FlightModule::class])
     fun contributeFlightActivityInjector(): FlightActivity
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = [ClubModule::class])
+    fun contributeClubActivityInjector(): ClubActivity
 }

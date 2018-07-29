@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
-import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.DateHeaderRowBinding
 import cz.dmn.cpska.databinding.FlightsRowBinding
@@ -19,6 +18,7 @@ import cz.dmn.cpska.ui.ItemClickListener
 import cz.dmn.cpska.ui.common.AdapterItem
 import cz.dmn.cpska.ui.common.DateHeaderViewHolder
 import cz.dmn.cpska.ui.common.DateHeaderViewModel
+import cz.dmn.cpska.ui.common.ItemDiffCallback
 import cz.dmn.cpska.ui.common.LoaderViewHolder
 import cz.dmn.cpska.ui.common.LoaderViewModel
 import cz.dmn.cpska.util.RecentDateFormatter
@@ -34,10 +34,9 @@ class FlightsAdapter @Inject constructor(
     private val flightClickListener: ItemClickListener<FlightData>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderHandler {
 
-    private val flights = mutableListOf<FlightData>()
+    private val flights = mutableListOf<Pair<FlightData, Boolean>>()
     private val allItems = mutableListOf<AdapterItem>()
     private var loadingFlag = false
-    private var highlightedClub: Club? = null
 
     override fun getItemCount() = allItems.size
 
@@ -81,7 +80,8 @@ class FlightsAdapter @Inject constructor(
         reloadAllItems()
     }
 
-    fun add(data: List<FlightData>) {
+    fun replace(data: List<Pair<FlightData, Boolean>>) {
+        flights.clear()
         flights.addAll(data)
         reloadAllItems()
     }
@@ -90,15 +90,15 @@ class FlightsAdapter @Inject constructor(
         val itemsToAdd = mutableListOf<AdapterItem>()
         var lastDate : LocalDate? = null
         flights.forEach {
-            val model = FlightViewModel(it, res)
-            highlightedClub?.apply {
-                if (model.club == name) {
-                    model.background = highlightedBackground
-                }
+            val flightData = it.first
+            val highlighted = it.second
+            val model = FlightViewModel(flightData, res)
+            if (highlighted) {
+                model.background = highlightedBackground
             }
-            if (lastDate == null || !it.date.isEqual(lastDate)) {
-                lastDate = it.date
-                itemsToAdd.add(DateHeaderViewModel(dateFormatter.format(it.date)))
+            if (lastDate == null || !flightData.date.isEqual(lastDate)) {
+                lastDate = flightData.date
+                itemsToAdd.add(DateHeaderViewModel(dateFormatter.format(flightData.date)))
             }
             itemsToAdd.add(model)
         }
@@ -112,25 +112,9 @@ class FlightsAdapter @Inject constructor(
         notifyDataSetChanged()
     }
 
-    fun setHighlightedClub(club: Club?) {
-        highlightedClub = club
-        reloadAllItems()
-    }
-
     object ViewTypes {
         val Flight = 0
         val Header = 1
         val Loader = 2
-    }
-
-    class ItemDiffCallback(private val newItems: List<AdapterItem>, private val oldItems: List<AdapterItem>) : DiffUtil.Callback() {
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = oldItems[oldItemPosition] isSameAs newItems[newItemPosition]
-
-        override fun getOldListSize() = oldItems.size
-
-        override fun getNewListSize() = newItems.size
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = oldItems[oldItemPosition] isSameContentAs newItems[newItemPosition]
     }
 }
