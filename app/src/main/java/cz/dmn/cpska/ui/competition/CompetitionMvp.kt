@@ -3,6 +3,7 @@ package cz.dmn.cpska.ui.competition
 import cz.dmn.cpska.data.api.CompetitionDetails
 import cz.dmn.cpska.mvp.MvpPresenter
 import cz.dmn.cpska.mvp.MvpView
+import cz.dmn.cpska.mvp.PresenterState
 
 interface CompetitionMvp {
 
@@ -12,7 +13,7 @@ interface CompetitionMvp {
         fun error(message: String)
     }
 
-    interface Presenter: MvpPresenter<View> {
+    interface Presenter: MvpPresenter<View, PresenterState<*>> {
         fun load()
     }
 }

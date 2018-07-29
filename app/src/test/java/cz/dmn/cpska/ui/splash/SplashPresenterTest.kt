@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
 import cz.dmn.cpska.CpsApp
 import cz.dmn.cpska.RxSchedulersOverrideRule
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import cz.dmn.cpska.navigators.HomeNavigator
 import io.reactivex.Observable
 import org.junit.Before
@@ -26,7 +27,7 @@ class SplashPresenterTest {
 
     @Before
     fun setUp() {
-        presenter = SplashPresenter(homeNavigator, app)
+        presenter = SplashPresenter(homeNavigator, app, EmptyPresenterState())
     }
 
     @Test

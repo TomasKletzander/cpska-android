@@ -105,11 +105,17 @@ class FlightsAdapter @Inject constructor(
         if (loadingFlag) {
             itemsToAdd.add(LoaderViewModel)
         }
-        val diffResult = DiffUtil.calculateDiff(ItemDiffCallback(itemsToAdd, allItems))
-        allItems.clear()
-        allItems.addAll(itemsToAdd)
-        diffResult.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
+        if (allItems.isEmpty()) {
+            allItems.addAll(itemsToAdd)
+            notifyDataSetChanged()
+        } else {
+            val diffResult = DiffUtil.calculateDiff(ItemDiffCallback(itemsToAdd, allItems))
+            allItems.clear()
+            allItems.addAll(itemsToAdd)
+            //  For some reason this call causes first display to scroll down few rows. Will use diff once I figure out what's wrong...
+            //diffResult.dispatchUpdatesTo(this)
+            notifyDataSetChanged()
+        }
     }
 
     object ViewTypes {

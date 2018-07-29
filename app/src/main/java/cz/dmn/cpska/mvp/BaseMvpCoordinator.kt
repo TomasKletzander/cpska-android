@@ -2,12 +2,13 @@ package cz.dmn.cpska.mvp
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.os.Bundle
 import android.view.View
 import com.squareup.coordinators.Coordinator
 import dagger.Lazy
 import javax.inject.Inject
 
-abstract class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V>, out VB: ViewDataBinding> : Coordinator() {
+abstract class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V, PresenterState<*>>, out VB: ViewDataBinding> : Coordinator() {
 
     @Inject lateinit var presenterLazy: Lazy<P>
     @Inject lateinit var viewLazy: Lazy<V>
@@ -30,4 +31,12 @@ abstract class BaseMvpCoordinator<V: MvpView, P: MvpPresenter<V>, out VB: ViewDa
     }
 
     abstract fun onAttach()
+
+    fun restoreState(inState: Bundle) {
+        presenter.restoreState(inState)
+    }
+
+    fun saveState(outState: Bundle) {
+        presenter.saveState(outState)
+    }
 }

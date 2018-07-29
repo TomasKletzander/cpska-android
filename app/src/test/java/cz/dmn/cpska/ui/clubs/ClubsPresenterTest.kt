@@ -10,6 +10,7 @@ import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
 import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
+import cz.dmn.cpska.mvp.EmptyPresenterState
 import cz.dmn.cpska.navigators.ClubNavigator
 import cz.dmn.cpska.testutil.shouldEqual
 import cz.dmn.cpska.util.FavoriteClubsManager
@@ -43,7 +44,7 @@ class ClubsPresenterTest {
         whenever(view.requestOpenClub).thenReturn(requestOpenSubject)
         whenever(favoriteClubsManager.events).thenReturn(eventsSubject)
         whenever(clubsCache.data).thenReturn(clubsCacheData)
-        presenter = ClubsPresenter(clubsCache, clubNavigator, favoriteClubsManager)
+        presenter = ClubsPresenter(clubsCache, clubNavigator, favoriteClubsManager, EmptyPresenterState())
     }
 
     @Test

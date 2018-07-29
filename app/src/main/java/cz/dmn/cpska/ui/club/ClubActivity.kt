@@ -2,7 +2,6 @@ package cz.dmn.cpska.ui.club
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import com.squareup.coordinators.Coordinators
 import cz.dmn.cpska.R
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.databinding.ActivityClubBinding
@@ -26,8 +25,18 @@ class ClubActivity : BaseActivity() {
         supportActionBar?.title = club.name
         binding.toolbar.setTypeface(getString(R.string.fontDecorative))
 
-        Coordinators.installBinder(binding.content, tabsManager)
-
         flightsPresenter.filterClub = club
+
+        tabsManager.install(binding.content, binding.navigation)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.let { tabsManager.restoreState(it) }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        tabsManager.saveState(outState)
     }
 }

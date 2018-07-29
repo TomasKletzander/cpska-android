@@ -1,6 +1,6 @@
 package cz.dmn.cpska.ui.flight
 
-import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.di.BaseActivityModule
 import cz.dmn.cpska.ui.flight.info.FlightInfoModule
@@ -21,7 +21,7 @@ abstract class FlightModule {
     }
 
     @Binds
-    abstract fun bindActivity(activity: FlightActivity): Activity
+    abstract fun bindActivity(activity: FlightActivity): AppCompatActivity
 
     @Binds
     abstract fun bindView(activity: FlightActivity): FlightMvp.View

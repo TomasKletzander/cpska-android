@@ -1,18 +1,23 @@
 package cz.dmn.cpska.mvp
 
-import android.app.ProgressDialog.show
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import io.reactivex.disposables.Disposable
 
-abstract class BasePagedDataPresenter<in ID, VD, V: PagedDataView<VD>>(private val interactor: BasePagedDataInteractor<ID>) : PagedDataPresenter<ID, VD, V>, BaseMvpPresenter<V>() {
+abstract class BasePagedDataPresenter<ID, VD, V: PagedDataView<VD>>(
+    private val interactor: BasePagedDataInteractor<ID>
+) : PagedDataPresenter<ID, VD, V>, BaseMvpPresenter<V, BasePagedDataPresenterState<ID, BasePagedDataPresenterState.StateHolder<ID>>>() {
+
     private var loading = false
     private var requestNextPageDisposable: Disposable? = null
-    private val data = mutableListOf<ID>()
 
     override fun attachView(view: V) {
         super.attachView(view)
-        reset()
-        loadNextPage()
+        if (state.data.isEmpty() && state.page == 0) {
+            reset()
+            loadNextPage()
+        } else {
+            refresh()
+        }
         requestNextPageDisposable = view.requestNextPage.subscribe {
             if (!loading) {
                 loadNextPage()
@@ -29,8 +34,8 @@ abstract class BasePagedDataPresenter<in ID, VD, V: PagedDataView<VD>>(private v
 
     override fun reset() {
         view?.clear()
-        data.clear()
-        interactor.page = 0
+        state.data.clear()
+        state.page = 0
         interactor.unsubscribe()
         loading = false
     }
@@ -38,18 +43,19 @@ abstract class BasePagedDataPresenter<in ID, VD, V: PagedDataView<VD>>(private v
     override fun loadNextPage() {
         if (loading) return
         loading = true
+        interactor.page = state.page
         interactor.execute(object : BaseInteractorSubscriber<List<ID>>() {
             override fun onStart() {
                 view?.loading = true
             }
 
             override fun onNext(t: List<ID>) {
-                data.addAll(t)
+                state.data.addAll(t)
                 view?.apply {
-                    show(data.map { mapData(it) })
+                    show(state.data.map { mapData(it) })
                     loading = false
                 }
-                ++interactor.page
+                ++state.page
                 loading = false
             }
 
@@ -63,7 +69,7 @@ abstract class BasePagedDataPresenter<in ID, VD, V: PagedDataView<VD>>(private v
     }
 
     fun refresh() {
-        view?.show(data.map { mapData(it) })
+        view?.show(state.data.map { mapData(it) })
     }
 
     abstract fun mapData(interactorData: ID): VD
