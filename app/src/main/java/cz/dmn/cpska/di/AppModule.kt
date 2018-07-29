@@ -28,9 +28,4 @@ class AppModule(private val app: CpsApp) {
     @Provides
     @HighlightedBackground
     fun provideHighlightedBackground(@ByApplication res: Resources): Drawable = ColorDrawable(res.getColor(R.color.highlightBackground))
-
-    @Provides
-    @PerApplication
-    @FlightsPreferences
-    fun provideFlightsPreferences(): SharedPreferences = app.getSharedPreferences("Flights", Context.MODE_PRIVATE)
 }

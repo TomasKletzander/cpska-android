@@ -8,5 +8,6 @@ import javax.inject.Inject
 
 @PerActivity
 class FlightsInteractor @Inject constructor(private val dataManager: DataManager) : BasePagedDataInteractor<FlightData>() {
-    override fun buildInteractorObservable() = dataManager.getFlights(page)
+    var clubId = 0
+    override fun buildInteractorObservable() = dataManager.getFlights(clubId, page)
 }

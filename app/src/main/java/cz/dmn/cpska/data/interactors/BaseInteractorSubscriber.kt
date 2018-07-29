@@ -2,7 +2,7 @@ package cz.dmn.cpska.data.interactors
 
 import io.reactivex.observers.DisposableObserver
 
-abstract class BaseInteractorSubscriber<D> : DisposableObserver<D>() {
+open class BaseInteractorSubscriber<D> : DisposableObserver<D>() {
 
     override public fun onStart() {
     }

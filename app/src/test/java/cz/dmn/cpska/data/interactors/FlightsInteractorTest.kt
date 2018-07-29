@@ -26,17 +26,18 @@ class FlightsInteractorTest {
 
     @Before
     fun setUp() {
-        whenever(dataManager.getFlights(anyInt())).thenReturn(Observable.just(data))
+        whenever(dataManager.getFlights(anyInt(), anyInt())).thenReturn(Observable.just(data))
         interactor = FlightsInteractor(dataManager)
     }
 
     @Test
     fun shouldCallApi() {
         interactor.apply {
+            clubId = 1
             page = 2
         }.execute(testObserver)
 
-        verify(dataManager).getFlights(2)
+        verify(dataManager).getFlights(1, 2)
         testObserver.awaitTerminalEvent()
         testObserver.assertNoErrors()
         testObserver.assertValue(data)

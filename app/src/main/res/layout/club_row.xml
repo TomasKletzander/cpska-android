@@ -15,7 +15,8 @@
         android:paddingEnd="@dimen/marginBig"
         android:paddingTop="@dimen/marginStandard"
         android:paddingBottom="@dimen/marginStandard"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="?selectableItemBackground">
 
         <TextView
             android:layout_width="0dp"
@@ -28,13 +29,13 @@
             tools:text="Medlanky"/>
 
         <ImageView
+            android:id="@+id/favorite"
             android:layout_width="@dimen/favoriteSize"
             android:layout_height="@dimen/favoriteSize"
             android:padding="@dimen/marginStandard"
             android:tint="@color/textStrong"
             android:src="@{viewModel.favorite ? @drawable/heart : @drawable/heart_outline}"
-            android:background="?selectableItemBackgroundBorderless"
-            android:onClick="@{viewModel.toggleFavorite}"/>
+            android:background="?selectableItemBackgroundBorderless"/>
 
     </LinearLayout>
 

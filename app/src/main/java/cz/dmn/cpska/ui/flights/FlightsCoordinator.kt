@@ -2,24 +2,19 @@ package cz.dmn.cpska.ui.flights
 
 import android.content.Context
 import android.support.design.widget.Snackbar
-import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import com.brandongogetap.stickyheaders.StickyLayoutManager
 import cz.dmn.cpska.R
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.CoordFlightsBinding
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.di.ByActivity
-import cz.dmn.cpska.extensions.addOneShotGlobalLayoutListener
 import cz.dmn.cpska.mvp.TabbedCoordinator
 import cz.dmn.cpska.ui.ItemClickListener
-import cz.dmn.cpska.ui.common.ClubsAdapter
 import dagger.Lazy
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -29,51 +24,33 @@ import javax.inject.Inject
 class FlightsCoordinator @Inject constructor(
     @ByActivity private val context: Context,
     private val adapterLazy: Lazy<FlightsAdapter>,
-    @ByActivity private val menuInflater: MenuInflater,
-    private val settingsModel: FlightsSettingsModel,
-    private val clubsAdapter: ClubsAdapter
+    @ByActivity private val menuInflater: MenuInflater
 ) : TabbedCoordinator<FlightsMvp.View, FlightsMvp.Presenter, CoordFlightsBinding>(), FlightsMvp.View, ItemClickListener<FlightData> {
 
     val adapter by lazy { adapterLazy.get() }
 
-    var settingsFrameOffset = 0f
-
     override fun onAttach() {
         binding.adapter = adapter
-        binding.settingsModel = settingsModel
         binding.listFlights.layoutManager = StickyLayoutManager(context, adapter).also {
             it.elevateHeaders(true)
         }
         binding.listFlights.addOnScrollListener(pagingScrollListener)
-        binding.settings.setOnClickListener {
-            showSettings()
-        }
-        binding.setCloseSettingsListener {
-            hideSettings()
-        }
-        binding.clubs.adapter = clubsAdapter
-        binding.settingsFrame.addOneShotGlobalLayoutListener {
-            settingsFrameOffset = binding.settingsFrame.height.toFloat() +
-                    (binding.settingsFrame.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
-            binding.settingsFrame.translationY = settingsFrameOffset
-            binding.settingsFrame.visibility = View.GONE
-        }
-
-        settingsModel.selectedClubSubject.subscribe {
-            adapter.setHighlightedClub(it.data)
-        }
     }
 
     override fun clear() {
         adapter.clear()
     }
 
-    override fun addPage(pageData: List<FlightData>) {
-        adapter.add(pageData)
+    override fun show(data: List<Pair<FlightData, Boolean>>) {
+        adapter.replace(data)
     }
 
-    override fun showError(message: String) {
+    override fun error(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun warning(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override var loading: Boolean
@@ -104,30 +81,6 @@ class FlightsCoordinator @Inject constructor(
 
     override fun onItemClicked(item: FlightData) {
         requestOpenFlight.onNext(item)
-    }
-
-    private fun showSettings() {
-        if (binding.settingsFrame.visibility != View.VISIBLE) {
-            binding.settingsFrame.visibility = View.VISIBLE
-            binding.settingsFrame.animate()
-                    .translationY(0f)
-                    .setDuration(200)
-                    .setInterpolator(LinearOutSlowInInterpolator())
-            binding.settings.hide()
-        }
-    }
-
-    private fun hideSettings() {
-        if (binding.settingsFrame.visibility == View.VISIBLE) {
-            binding.settingsFrame.animate()
-                    .translationY(settingsFrameOffset)
-                    .setDuration(200)
-                    .setInterpolator(LinearOutSlowInInterpolator())
-                    .withEndAction {
-                        binding.settingsFrame.visibility = View.GONE
-                        binding.settings.show()
-                    }
-        }
     }
 
     private val pagingScrollListener = object : RecyclerView.OnScrollListener() {

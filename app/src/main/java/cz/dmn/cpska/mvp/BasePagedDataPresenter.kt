@@ -1,11 +1,13 @@
 package cz.dmn.cpska.mvp
 
+import android.app.ProgressDialog.show
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import io.reactivex.disposables.Disposable
 
-open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interactor: BasePagedDataInteractor<D>) : PagedDataPresenter<D, V>, BaseMvpPresenter<V>() {
+abstract class BasePagedDataPresenter<in ID, VD, V: PagedDataView<VD>>(private val interactor: BasePagedDataInteractor<ID>) : PagedDataPresenter<ID, VD, V>, BaseMvpPresenter<V>() {
     private var loading = false
     private var requestNextPageDisposable: Disposable? = null
+    private val data = mutableListOf<ID>()
 
     override fun attachView(view: V) {
         super.attachView(view)
@@ -27,6 +29,7 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interac
 
     override fun reset() {
         view?.clear()
+        data.clear()
         interactor.page = 0
         interactor.unsubscribe()
         loading = false
@@ -35,14 +38,15 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interac
     override fun loadNextPage() {
         if (loading) return
         loading = true
-        interactor.execute(object : BaseInteractorSubscriber<List<D>>() {
+        interactor.execute(object : BaseInteractorSubscriber<List<ID>>() {
             override fun onStart() {
                 view?.loading = true
             }
 
-            override fun onNext(t: List<D>) {
+            override fun onNext(t: List<ID>) {
+                data.addAll(t)
                 view?.apply {
-                    addPage(t)
+                    show(data.map { mapData(it) })
                     loading = false
                 }
                 ++interactor.page
@@ -52,9 +56,15 @@ open class BasePagedDataPresenter<in D, V: PagedDataView<D>>(private val interac
             override fun onError(e: Throwable) {
                 view?.apply {
                     loading = false
-                    showError(e.localizedMessage)
+                    error(e.localizedMessage)
                 }
             }
         })
     }
+
+    fun refresh() {
+        view?.show(data.map { mapData(it) })
+    }
+
+    abstract fun mapData(interactorData: ID): VD
 }

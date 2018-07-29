@@ -16,7 +16,7 @@ class DataManager @Inject constructor(
     private val competitionDetailsDataSource: CompetitionDetailsDataSource,
     private val flightDetailsDataSource: FlightDetailsDataSource
 ) {
-    fun getFlights(page: Int) = flightsDataSource.getPage(page)
+    fun getFlights(clubId: Int, page: Int) = flightsDataSource.getPage(clubId, page)
     fun getClubs() = clubsDataSource.getClubs()
     fun getCompetitions() = competitionsDataSource.getCompetitions()
     fun getCompetitionDetails(id: Int) = competitionDetailsDataSource.getCompetitionDetails(id)

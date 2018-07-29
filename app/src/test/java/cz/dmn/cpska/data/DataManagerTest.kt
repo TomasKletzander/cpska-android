@@ -36,8 +36,8 @@ class DataManagerTest {
 
     @Test
     fun getFlights() {
-        dataManager.getFlights(1)
-        verify(flightsDataSource).getPage(1)
+        dataManager.getFlights(0,1)
+        verify(flightsDataSource).getPage(0,1)
     }
 
     @Test

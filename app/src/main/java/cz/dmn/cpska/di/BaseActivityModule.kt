@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuInflater
+import cz.dmn.cpska.data.api.source.FlightsDataSource
+import cz.dmn.cpska.data.api.source.FlightsHtmlDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

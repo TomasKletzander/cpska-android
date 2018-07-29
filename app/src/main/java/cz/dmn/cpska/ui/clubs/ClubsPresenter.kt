@@ -4,14 +4,41 @@ import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.di.PerActivity
 import cz.dmn.cpska.mvp.BaseMvpPresenter
+import cz.dmn.cpska.navigators.ClubNavigator
+import cz.dmn.cpska.util.FavoriteClubsManager
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @PerActivity
-class ClubsPresenter @Inject constructor(private val clubsCache: MemoryCache<List<Club>>)
-    : BaseMvpPresenter<ClubsMvp.View>(), ClubsMvp.Presenter {
+class ClubsPresenter @Inject constructor(
+    private val clubsCache: MemoryCache<List<Club>>,
+    private val clubNavigator: ClubNavigator,
+    private val favoriteClubsManager: FavoriteClubsManager
+) : BaseMvpPresenter<ClubsMvp.View>(), ClubsMvp.Presenter {
+
+    private val disposables = CompositeDisposable()
 
     override fun attachView(view: ClubsMvp.View) {
         super.attachView(view)
-        view.show(clubsCache.data)
+        disposables.addAll(view.requestOpenClub.subscribe {
+            clubNavigator.navigateToClub(it)
+        }, view.toggleFavoriteClub.subscribe {
+            toggleFavoriteClub(it)
+        }, favoriteClubsManager.events.subscribe {
+            refreshView()
+        })
+        refreshView()
+    }
+
+    private fun refreshView() {
+        view?.show(clubsCache.data.map { Pair(it, favoriteClubsManager.isFavorite(it.id)) })
+    }
+
+    private fun toggleFavoriteClub(club: Club) {
+        if (favoriteClubsManager.isFavorite(club.id)) {
+            favoriteClubsManager.removeFavorite(club.id)
+        } else {
+            favoriteClubsManager.addFavorite(club.id)
+        }
     }
 }

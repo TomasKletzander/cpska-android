@@ -17,6 +17,4 @@ class FlightTabsManager @Inject constructor(
         R.id.flightInfo -> flightInfoCoordinator
         else -> null
     }
-
-
 }

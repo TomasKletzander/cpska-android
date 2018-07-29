@@ -19,7 +19,11 @@ class FlightDetailsHtmlDataSource @Inject constructor(private val api: CpsHtmlAp
                 val right = doc.getElementsByAttributeValue("id", "right")[0]
                 val date = LocalDate.parse(right.child(0).text(), DateTimeFormat.forPattern("dd.MM.yyyy"))
                 val panel = right.getElementsByClass("panel_lt")[2]
-                val points = panel.child(3).text().split(" ")[0].toInt()
+                val pointsText = panel.child(3).text().split(" ")[0]
+                var points = 0
+                try {
+                    points = pointsText.toInt()
+                } catch (e: Throwable) {}
                 val distance = panel.child(1).text().split(" ")[0].toFloat()
                 val speed = panel.child(2).text().split(" ")[0].toFloat()
                 val panelUser = right.getElementsByClass("panel_pilot")[0]

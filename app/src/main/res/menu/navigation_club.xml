@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationFlights"
+        android:icon="@drawable/format_list_bulleted"
+        android:title="@string/titleFlights" />
+
+    <item
+        android:id="@+id/navigationLeaderboard"
+        android:icon="@drawable/medal"
+        android:title="@string/titleLeaderboard" />
+
+</menu>

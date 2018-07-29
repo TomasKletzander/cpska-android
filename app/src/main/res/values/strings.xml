@@ -23,4 +23,5 @@
     <string name="speedFormat">%.2f km/h</string>
     <string name="pointsFormat">%d b</string>
     <string name="flight">Let</string>
+    <string name="warningFlightProcessing">Let se teprve zpracovává.\nZkus to později.</string>
 </resources>

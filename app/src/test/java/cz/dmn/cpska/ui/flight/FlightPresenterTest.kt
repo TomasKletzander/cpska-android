@@ -11,6 +11,7 @@ import cz.dmn.cpska.data.api.Plane
 import cz.dmn.cpska.data.api.User
 import cz.dmn.cpska.data.interactors.BaseInteractorSubscriber
 import cz.dmn.cpska.data.interactors.FlightDetailsInteractor
+import cz.dmn.cpska.ui.flight.info.FlightInfoPresenter
 import io.reactivex.observers.TestObserver
 import org.joda.time.LocalDate
 import org.junit.Before
@@ -30,18 +31,18 @@ class FlightPresenterTest {
     @Mock lateinit var view: FlightMvp.View
     @Captor lateinit var subscriberCaptor: ArgumentCaptor<BaseInteractorSubscriber<FlightDetails>>
     @Mock lateinit var data: FlightDetails
+    @Mock lateinit var flightInfoPresenter: FlightInfoPresenter
     val flight = FlightData(1, LocalDate.now(), "cz", 10, User(1, "user"),
             100f, 90f, Club(1, "Medlanky"), Plane("Astir"))
 
     @Before
     fun setUp() {
-        presenter = FlightPresenter(interactor, flight)
+        presenter = FlightPresenter(interactor, flight, flightInfoPresenter)
     }
 
     @Test
     fun testHappyPath() {
         presenter.attachView(view)
-        verify(view).showInfo(flight.user.name, flight.plane.name)
         verifyNoMoreInteractions(view)
         verify(interactor).flightId = 1
         verify(interactor).execute(subscriberCaptor.capture())
@@ -64,7 +65,6 @@ class FlightPresenterTest {
     @Test
     fun testErrorPath() {
         presenter.attachView(view)
-        verify(view).showInfo(flight.user.name, flight.plane.name)
         verifyNoMoreInteractions(view)
         verify(interactor).flightId = 1
         verify(interactor).execute(subscriberCaptor.capture())

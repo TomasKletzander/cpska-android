@@ -23,14 +23,16 @@ class BasePagedDataPresenterTest {
     @Rule @JvmField val rule = RxSchedulersOverrideRule()
     @Mock lateinit var view: PagedDataView<Data>
     @Mock lateinit var interactor: BasePagedDataInteractor<Data>
-    lateinit var presenter: BasePagedDataPresenter<Data, PagedDataView<Data>>
+    lateinit var presenter: BasePagedDataPresenter<Data, Data, PagedDataView<Data>>
     @Captor lateinit var subscriberCaptor: ArgumentCaptor<BaseInteractorSubscriber<List<Data>>>
     val nextPageSubject = PublishSubject.create<Any>()
 
     @Before
     fun setUp() {
         whenever(view.requestNextPage).thenReturn(nextPageSubject)
-        presenter = BasePagedDataPresenter(interactor)
+        presenter = object : BasePagedDataPresenter<Data, Data, PagedDataView<Data>>(interactor) {
+            override fun mapData(interactorData: Data) = interactorData
+        }
     }
 
     @Test
@@ -57,7 +59,7 @@ class BasePagedDataPresenterTest {
         val data = emptyList<Data>()
         page1Subscriber.onNext(data)
         verify(view).loading = false
-        verify(view).addPage(data)
+        verify(view).show(data)
         verifyNoMoreInteractions(view)
         reset(view)
         verify(interactor).page = 1
@@ -66,7 +68,6 @@ class BasePagedDataPresenterTest {
         //  Should request next page upon view signal
         nextPageSubject.onNext(Any())
         verify(interactor).execute(subscriberCaptor.capture())
-        val page2Subscriber: BaseInteractorSubscriber<List<Data>> = subscriberCaptor.value
         verifyNoMoreInteractions(interactor)
 
         //  Should ignore request for another page while load in progress

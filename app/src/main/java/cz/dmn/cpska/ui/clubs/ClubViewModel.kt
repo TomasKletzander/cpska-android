@@ -1,13 +1,15 @@
 package cz.dmn.cpska.ui.clubs
 
 import android.databinding.ObservableBoolean
-import android.view.View
 import cz.dmn.cpska.data.api.Club
+import cz.dmn.cpska.ui.common.AdapterItem
 
-class ClubViewModel(club: Club, favoriteFlag: Boolean) {
+class ClubViewModel(val club: Club, favoriteFlag: Boolean) : AdapterItem {
 
     val clubName = club.name
     val favorite = ObservableBoolean(favoriteFlag)
 
-    val toggleFavorite = View.OnClickListener { favorite.set(!favorite.get()) }
+    override fun isSameAs(other: AdapterItem) = (other as? ClubViewModel)?.club?.id == club.id
+
+    override fun isSameContentAs(other: AdapterItem) = (other as? ClubViewModel)?.let { it.club.id == club.id && it.favorite.get() == favorite.get() } ?: false
 }
