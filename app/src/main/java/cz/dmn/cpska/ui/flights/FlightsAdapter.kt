@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
+import cz.dmn.cpska.R
 import cz.dmn.cpska.data.api.FlightData
 import cz.dmn.cpska.databinding.DateHeaderRowBinding
+import cz.dmn.cpska.databinding.EmptyIndicatorBinding
 import cz.dmn.cpska.databinding.FlightsRowBinding
 import cz.dmn.cpska.databinding.LoaderRowBinding
 import cz.dmn.cpska.di.ByActivity
@@ -18,9 +20,12 @@ import cz.dmn.cpska.ui.ItemClickListener
 import cz.dmn.cpska.ui.common.AdapterItem
 import cz.dmn.cpska.ui.common.DateHeaderViewHolder
 import cz.dmn.cpska.ui.common.DateHeaderViewModel
+import cz.dmn.cpska.ui.common.EmptyIndicatorViewHolder
+import cz.dmn.cpska.ui.common.EmptyIndicatorViewModel
 import cz.dmn.cpska.ui.common.ItemDiffCallback
 import cz.dmn.cpska.ui.common.LoaderViewHolder
 import cz.dmn.cpska.ui.common.LoaderViewModel
+import cz.dmn.cpska.ui.flights.FlightsAdapter.ViewTypes.EmptyIndicator
 import cz.dmn.cpska.util.RecentDateFormatter
 import org.joda.time.LocalDate
 import javax.inject.Inject
@@ -37,6 +42,7 @@ class FlightsAdapter @Inject constructor(
     private val flights = mutableListOf<Pair<FlightData, Boolean>>()
     private val allItems = mutableListOf<AdapterItem>()
     private var loadingFlag = false
+    private val emptyIndicatorViewModel = EmptyIndicatorViewModel(res.getString(R.string.noFlightsFound))
 
     override fun getItemCount() = allItems.size
 
@@ -44,6 +50,7 @@ class FlightsAdapter @Inject constructor(
         is FlightViewModel -> ViewTypes.Flight
         is LoaderViewModel -> ViewTypes.Loader
         is DateHeaderViewModel -> ViewTypes.Header
+        is EmptyIndicatorViewModel -> ViewTypes.EmptyIndicator
         else -> throw RuntimeException("Unexpected item type " + allItems[position].javaClass.name + " at position " + position)
     }
 
@@ -52,6 +59,7 @@ class FlightsAdapter @Inject constructor(
             ViewTypes.Flight -> FlightRowViewHolder(FlightsRowBinding.inflate(layoutInflater, parent, false), flightClickListener)
             ViewTypes.Loader -> LoaderViewHolder(LoaderRowBinding.inflate(layoutInflater, parent, false))
             ViewTypes.Header -> DateHeaderViewHolder(DateHeaderRowBinding.inflate(layoutInflater, parent, false))
+            ViewTypes.EmptyIndicator -> EmptyIndicatorViewHolder(EmptyIndicatorBinding.inflate(layoutInflater, parent, false))
             else -> throw RuntimeException("Unexpected type")
         }
     }
@@ -61,6 +69,7 @@ class FlightsAdapter @Inject constructor(
             when (this) {
                 is FlightViewModel -> (holder as? FlightRowViewHolder)?.bind(this)
                 is DateHeaderViewModel -> (holder as? DateHeaderViewHolder)?.binding?.viewModel = this
+                is EmptyIndicatorViewModel -> (holder as? EmptyIndicatorViewHolder)?.binding?.viewModel = this
             }
         }
     }
@@ -105,6 +114,9 @@ class FlightsAdapter @Inject constructor(
         if (loadingFlag) {
             itemsToAdd.add(LoaderViewModel)
         }
+        if (itemsToAdd.isEmpty()) {
+            itemsToAdd.add(emptyIndicatorViewModel)
+        }
         if (allItems.isEmpty()) {
             allItems.addAll(itemsToAdd)
             notifyDataSetChanged()
@@ -122,5 +134,6 @@ class FlightsAdapter @Inject constructor(
         val Flight = 0
         val Header = 1
         val Loader = 2
+        val EmptyIndicator = 3
     }
 }
