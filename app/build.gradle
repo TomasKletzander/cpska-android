@@ -29,8 +29,8 @@ android {
         applicationId "cz.dmn.cpska"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 8
-        versionName "0.6"
+        versionCode 9
+        versionName "0.7 development"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
