@@ -109,4 +109,7 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="Text.EmptyIndicator" parent="Base.TextAppearance.AppCompat.Caption">
+    </style>
+
 </resources>

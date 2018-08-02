@@ -24,4 +24,5 @@
     <string name="pointsFormat">%d b</string>
     <string name="flight">Let</string>
     <string name="warningFlightProcessing">Let se teprve zpracovává.\nZkus to později.</string>
+    <string name="noFlightsFound">Nenašel jsem žádné lety</string>
 </resources>
