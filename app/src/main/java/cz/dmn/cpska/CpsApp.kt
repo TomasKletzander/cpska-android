@@ -8,6 +8,7 @@ import cz.dmn.cpska.data.DataManager
 import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.Competition
+import cz.dmn.cpska.data.api.cfg.Configuration
 import cz.dmn.cpska.di.AppModule
 import cz.dmn.cpska.di.DaggerAppComponent
 import cz.dmn.cpska.util.FavoriteClubsManager
@@ -25,6 +26,7 @@ class CpsApp : Application(), HasActivityInjector {
     @Inject lateinit var clubsCache: MemoryCache<List<Club>>
     @Inject lateinit var competitionsCache: MemoryCache<List<Competition>>
     @Inject lateinit var favoriteClubsManager: FavoriteClubsManager
+    lateinit var configuration: Configuration
 
     override fun onCreate() {
         super.onCreate()
@@ -36,11 +38,32 @@ class CpsApp : Application(), HasActivityInjector {
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
     fun initialize(): Observable<Boolean> =
-        dataManager.getClubs()
-                .doOnNext { clubsCache.data = it }
+        dataManager.getConfiguration()
+                .doOnNext { configuration = it }
+                .doOnError {
+                    Crashlytics.log("Failed to get configuration")
+                    Crashlytics.logException(it)
+                }
                 .flatMap {
-                    dataManager.getCompetitions().doOnNext { competitionsCache.data = it }
+                    dataManager.getClubs()
+                            .doOnNext { clubsCache.data = it }
+                            .doOnError {
+                                Crashlytics.log("Failed to get clubs")
+                                Crashlytics.logException(it)
+                            }
+                }
+                .flatMap {
+                    dataManager.getCompetitions()
+                            .doOnNext { competitionsCache.data = it }
+                            .doOnError {
+                                Crashlytics.log("Failed to get competitions")
+                                Crashlytics.logException(it)
+                            }
                 }.flatMap {
                     favoriteClubsManager.initialize()
+                            .doOnError {
+                                Crashlytics.log("Failed to initialize favorite clubs")
+                                Crashlytics.logException(it)
+                            }
                 }
 }

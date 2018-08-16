@@ -1,6 +1,7 @@
 package cz.dmn.cpska.data
 
 import cz.dmn.cpska.data.api.CpsHtmlApi
+import cz.dmn.cpska.data.api.DmnApi
 import cz.dmn.cpska.di.PerApplication
 import dagger.Module
 import dagger.Provides
@@ -35,5 +36,16 @@ abstract class DataModule {
                 .client(client)
                 .build()
                 .create(CpsHtmlApi::class.java)
+
+        @Provides
+        @PerApplication
+        @JvmStatic
+        fun provideDmnApi(client: OkHttpClient): DmnApi = Retrofit.Builder()
+                .baseUrl("http://api.dmn.cz/cpska/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+                .create(DmnApi::class.java)
     }
 }
