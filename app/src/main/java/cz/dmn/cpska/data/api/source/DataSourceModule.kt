@@ -26,4 +26,8 @@ interface DataSourceModule {
     @PerApplication
     @Binds
     fun bindFlightsDataSource(source: FlightsHtmlDataSource): FlightsDataSource
+
+    @PerApplication
+    @Binds
+    fun bindConfigurationDataSource(source: DmnDataSource): ConfigurationDataSource
 }
