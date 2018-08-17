@@ -6,6 +6,7 @@ import cz.dmn.cpska.data.api.source.CompetitionsDataSource
 import cz.dmn.cpska.data.api.source.ConfigurationDataSource
 import cz.dmn.cpska.data.api.source.FlightDetailsDataSource
 import cz.dmn.cpska.data.api.source.FlightsDataSource
+import cz.dmn.cpska.data.api.source.FogglesDataSource
 import cz.dmn.cpska.di.PerApplication
 import javax.inject.Inject
 
@@ -16,7 +17,8 @@ class DataManager @Inject constructor(
     private val competitionsDataSource: CompetitionsDataSource,
     private val competitionDetailsDataSource: CompetitionDetailsDataSource,
     private val flightDetailsDataSource: FlightDetailsDataSource,
-    private val configurationDataSource: ConfigurationDataSource
+    private val configurationDataSource: ConfigurationDataSource,
+    private val fogglesDataSource: FogglesDataSource
 ) {
     fun getFlights(clubId: Int, page: Int) = flightsDataSource.getPage(clubId, page)
     fun getClubs() = clubsDataSource.getClubs()
@@ -24,4 +26,5 @@ class DataManager @Inject constructor(
     fun getCompetitionDetails(id: Int) = competitionDetailsDataSource.getCompetitionDetails(id)
     fun getFlightDetails(id: Int) = flightDetailsDataSource.getFlightDetails(id)
     fun getConfiguration() = configurationDataSource.getConfiguration()
+    fun getFoggles() = fogglesDataSource.getFoggles()
 }
