@@ -5,6 +5,7 @@ import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
 import cz.dmn.cpska.data.DataManager
+import cz.dmn.cpska.data.Foggle
 import cz.dmn.cpska.data.MemoryCache
 import cz.dmn.cpska.data.api.Club
 import cz.dmn.cpska.data.api.Competition
@@ -45,6 +46,14 @@ class CpsApp : Application(), HasActivityInjector {
                     Crashlytics.logException(it)
                 }
                 .flatMap {
+                    dataManager.getFoggles()
+                            .doOnNext { saveFoggles(it) }
+                            .doOnError {
+                                Crashlytics.log("Failed to get foggles")
+                                Crashlytics.logException(it)
+                            }
+                }
+                .flatMap {
                     dataManager.getClubs()
                             .doOnNext { clubsCache.data = it }
                             .doOnError {
@@ -66,4 +75,14 @@ class CpsApp : Application(), HasActivityInjector {
                                 Crashlytics.logException(it)
                             }
                 }
+
+    private fun saveFoggles(apiData: Map<String, Boolean>) {
+        Foggle.values().forEach {
+            if (apiData.containsKey(it.key)) {
+                it.isEnabled = apiData[it.key]!!
+            } else {
+                it.isEnabled = it.defaultEnabled
+            }
+        }
+    }
 }

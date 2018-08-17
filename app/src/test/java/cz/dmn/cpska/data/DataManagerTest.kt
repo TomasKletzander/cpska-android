@@ -7,6 +7,7 @@ import cz.dmn.cpska.data.api.source.CompetitionsDataSource
 import cz.dmn.cpska.data.api.source.ConfigurationDataSource
 import cz.dmn.cpska.data.api.source.FlightDetailsDataSource
 import cz.dmn.cpska.data.api.source.FlightsHtmlDataSource
+import cz.dmn.cpska.data.api.source.FogglesDataSource
 import org.junit.Before
 import org.junit.Test
 
@@ -24,6 +25,7 @@ class DataManagerTest {
     @Mock lateinit var competitionDetailsDataSource: CompetitionDetailsDataSource
     @Mock lateinit var flightDetailsDataSource: FlightDetailsDataSource
     @Mock lateinit var configurationDataSource: ConfigurationDataSource
+    @Mock lateinit var fogglesDataSource: FogglesDataSource
 
     @Before
     fun setUp() {
@@ -33,7 +35,8 @@ class DataManagerTest {
                 competitionsDataSource,
                 competitionDetailsDataSource,
                 flightDetailsDataSource,
-                configurationDataSource
+                configurationDataSource,
+                fogglesDataSource
         )
     }
 
@@ -71,5 +74,11 @@ class DataManagerTest {
     fun getConfiguration() {
         dataManager.getConfiguration()
         verify(configurationDataSource).getConfiguration()
+    }
+
+    @Test
+    fun getFoggles() {
+        dataManager.getFoggles()
+        verify(fogglesDataSource).getFoggles()
     }
 }

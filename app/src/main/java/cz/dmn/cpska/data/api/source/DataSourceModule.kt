@@ -30,4 +30,8 @@ interface DataSourceModule {
     @PerApplication
     @Binds
     fun bindConfigurationDataSource(source: DmnDataSource): ConfigurationDataSource
+
+    @PerApplication
+    @Binds
+    fun bindFogglesDataSource(source: DmnDataSource): FogglesDataSource
 }
